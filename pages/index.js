@@ -4,18 +4,16 @@ const DUMMY_MEETUPS = [
   {
     id: "m1",
     title: "First ",
-    image:
-      "https://ae01.alicdn.com/kf/HTB1URwXRpXXXXXpapXXq6xXFXXXQ/Roupa-de-cachorro-casaco-de-guitarra-engra-ado-para-animais-de-estima-o-filhotes-e-cachorros.jpg_Q90.jpg_.webp",
-    address: "1234 street",
+    image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
+    address: "first street",
     description: "my meetup",
   },
   {
     id: "m2",
     title: "Second ",
-    image:
-      "https://ae01.alicdn.com/kf/HTB1URwXRpXXXXXpapXXq6xXFXXXQ/Roupa-de-cachorro-casaco-de-guitarra-engra-ado-para-animais-de-estima-o-filhotes-e-cachorros.jpg_Q90.jpg_.webp",
-    address: "1234 street",
-    description: "my meetup",
+    image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
+    address: "second street",
+    description: "my meetup2",
   },
 ];
 
@@ -23,13 +21,28 @@ function HomePage({ meetups }) {
   return <MeetupList meetups={meetups} />;
 }
 
+//always on server side, do it if you need to access the req or data changes frequently
+// export async function getServerSideProps(context){
+//   const req = context.req
+//   const res = context.res
+//   //only runs on the server
+//   return {
+//     props: {
+//       meetups: DUMMY_MEETUPS,
+//     }
+//   }
+// }
+
 export async function getStaticProps() {
+  // const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+  // const data = await res.json();
 
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users`)
-  const data = await res.json()
-  data.forEach(o => console.log(o.name))
-
-  return { props: { meetups: DUMMY_MEETUPS } };
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    revalidate: 10,
+  };
 }
 
 export default HomePage;
