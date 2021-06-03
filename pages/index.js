@@ -4,25 +4,6 @@ import { STRING_CON } from "../constants";
 // import useSwr from 'swr'
 // const fetcher = (url) => fetch(url).then((res) => res.json())
 
-const DUMMY_MEETUPS = [
-  {
-    id: "m1",
-    title: "First ",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
-    address: "first street",
-    description: "my meetup",
-  },
-  {
-    id: "m2",
-    title: "Second ",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
-    address: "second street",
-    description: "my meetup2",
-  },
-];
-
 function HomePage({ meetups }) {
   // const { data, error } = useSwr('/api/users', fetcher)
   // console.log(data)
@@ -42,7 +23,8 @@ function HomePage({ meetups }) {
 // }
 
 export async function getStaticProps() {
-    const client = await MongoClient.connect(STRING_CON);
+  //PRE GENERATED - NOT ALL INCOMING REQUEST, REFRESH 10SECOND
+    const client = await MongoClient.connect(STRING_CON, {useNewUrlParser: true, useUnifiedTopology: true});
     const db = client.db();
     const meetupsCollection = db.collection("meetups");
 

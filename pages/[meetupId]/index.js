@@ -1,6 +1,10 @@
+import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
+import { STRING_CON } from "../../constants";
 
 function MeetupDetails({ meetupData }) {
+  console.log("12312321");
+  console.log(meetupData);
   return (
     <MeetupDetail
       image={meetupData.image}
@@ -11,35 +15,46 @@ function MeetupDetails({ meetupData }) {
 }
 
 export async function getStaticPaths() {
+  const client = await MongoClient.connect(STRING_CON, {useNewUrlParser: true, useUnifiedTopology: true});
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+
+  client.close();
   //use this one if its dynamic[:id] and you have getStaticProps getting data on serverside..
   return {
     fallback: false, //generate and get then dynamically
     //false says you have all path made already
-    paths: [
-      {
-        params: {
-          meetupId: "m1",
-        },
-      },
-      {
-        params: {
-          meetupId: "m2",
-        },
-      },
-    ],
+    paths: meetups.map((m) => ({
+      params: { meetupId: m._id.toString() },
+    })),
   };
 }
 
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
 
+  const client = await MongoClient.connect(STRING_CON, {useNewUrlParser: true, useUnifiedTopology: true});
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+
+  const meetup = await meetupsCollection.findOne({
+    _id: ObjectId(meetupId),
+  });
+
+  console.log(meetup);
+
+  client.close();
+
   return {
     props: {
       meetupData: {
-        id: meetupId,
-        image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
-        title: "felipe 1231",
-        address: "hahaha address 123",
+        id: meetup._id.toString(),
+        image: meetup.image,
+        title: meetup.title,
+        description: meetup.description,
+        address: meetup.address
       },
     },
   };

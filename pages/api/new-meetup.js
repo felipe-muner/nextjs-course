@@ -6,7 +6,7 @@ async function handler(req, res) {
     const data = req.body;
     // const { title, image, address } = data;
   
-    const client = await MongoClient.connect(STRING_CON);
+    const client = await MongoClient.connect(STRING_CON, {useNewUrlParser: true, useUnifiedTopology: true});
 
     const db = client.db();
 

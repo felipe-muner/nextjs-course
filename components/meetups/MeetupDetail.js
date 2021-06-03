@@ -1,6 +1,7 @@
 import classes from './MeetupDetail.module.css'
 
 function MeetupDetails(props) {
+  console.log(props)
   return (
     <section className={classes.detail}>
       <img
