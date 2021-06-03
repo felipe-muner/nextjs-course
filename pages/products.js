@@ -22,7 +22,6 @@ function Products() {
   
   const classes = useStyles();
 
-  console.log(classes);
   return (
     <Fragment>
       <Grid item xs={6}>

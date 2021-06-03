@@ -3,7 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-function ProductForm() {
+function ProductForm(props) {
+  console.log(props)
   async function handleSubmit(event) {
     event.preventDefault();
     const res = await fetch("/api/products", {
@@ -16,7 +17,7 @@ function ProductForm() {
         "Content-Type": "application/json",
       },
       method: "POST",
-    })
+    });
 
     console.log(await res.json());
   }
@@ -26,7 +27,9 @@ function ProductForm() {
       <TextField id="name" label="Name" fullWidth autoComplete="none" />
       <TextField id="price" label="Price" fullWidth autoComplete="none" />
       <TextField id="category" label="Category" fullWidth autoComplete="none" />
-      <Button type="submit">Submit</Button>
+      <Button variant="contained" color="primary" type="submit">
+        Submit
+      </Button>
     </form>
   );
 }
