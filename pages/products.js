@@ -1,5 +1,42 @@
-function Dashboard() {
-  return <div>i'm products</div>
+import { Fragment } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import ProductForm from "../components/products/ProductForm";
+import ProductList from "../components/products/ProductList";
+
+const useStyles = makeStyles((theme) => {
+  return {
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+  };
+});
+
+function Products() {
+  
+  const classes = useStyles();
+
+  console.log(classes);
+  return (
+    <Fragment>
+      <Grid item xs={6}>
+        <Paper className={classes.paper}>
+          <ProductForm />
+        </Paper>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper className={classes.paper}>
+          <ProductList />
+        </Paper>
+      </Grid>
+    </Fragment>
+  );
 }
 
-export default Dashboard
+export default Products;
