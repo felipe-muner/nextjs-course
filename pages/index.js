@@ -1,13 +1,23 @@
+import Head from "next/head";
 import { MongoClient } from "mongodb"; // only used on server side
 import MeetupList from "../components/meetups/MeetupList";
 import { STRING_CON } from "../constants";
+import { Fragment } from "react";
 // import useSwr from 'swr'
 // const fetcher = (url) => fetch(url).then((res) => res.json())
 
 function HomePage({ meetups }) {
   // const { data, error } = useSwr('/api/users', fetcher)
   // console.log(data)
-  return <MeetupList meetups={meetups} />;
+  return (
+    <Fragment>
+      <Head>
+        <title>HomePage - Meetups</title>
+        <meta name="description" content="Meetups around the world." />
+      </Head>
+      <MeetupList meetups={meetups} />;
+    </Fragment>
+  );
 }
 
 //always on server side, do it if you need to access the req or data changes frequently
@@ -24,22 +34,25 @@ function HomePage({ meetups }) {
 
 export async function getStaticProps() {
   //PRE GENERATED - NOT ALL INCOMING REQUEST, REFRESH 10SECOND
-    const client = await MongoClient.connect(STRING_CON, {useNewUrlParser: true, useUnifiedTopology: true});
-    const db = client.db();
-    const meetupsCollection = db.collection("meetups");
+  const client = await MongoClient.connect(STRING_CON, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
 
-    const meetups = await meetupsCollection.find().toArray()
+  const meetups = await meetupsCollection.find().toArray();
 
-    client.close()
+  client.close();
 
   return {
     props: {
-      meetups: meetups.map(m => ({
+      meetups: meetups.map((m) => ({
         id: m._id.toString(),
         title: m.title,
         address: m.address,
-        image: m.image
-      }))
+        image: m.image,
+      })),
     },
     revalidate: 10,
   };

@@ -1,21 +1,33 @@
+import { Fragment } from "react";
+import Head from "next/head";
 import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import { STRING_CON } from "../../constants";
 
-function MeetupDetails({ meetupData }) {
-  console.log("12312321");
-  console.log(meetupData);
+function MeetupDetails({ meetupData, meetupId }) {  
   return (
-    <MeetupDetail
-      image={meetupData.image}
-      title={meetupData.title}
-      address={meetupData.address}
-    />
+    <Fragment>
+      <Head>
+        <title>HomePage - ID {meetupId}</title>
+        <meta
+          name="description"
+          content={meetupData.title}
+        />
+      </Head>
+      <MeetupDetail
+        image={meetupData.image}
+        title={meetupData.title}
+        address={meetupData.address}
+      />
+    </Fragment>
   );
 }
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect(STRING_CON, {useNewUrlParser: true, useUnifiedTopology: true});
+  const client = await MongoClient.connect(STRING_CON, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
 
@@ -35,7 +47,10 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
 
-  const client = await MongoClient.connect(STRING_CON, {useNewUrlParser: true, useUnifiedTopology: true});
+  const client = await MongoClient.connect(STRING_CON, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
 
@@ -54,8 +69,9 @@ export async function getStaticProps(context) {
         image: meetup.image,
         title: meetup.title,
         description: meetup.description,
-        address: meetup.address
+        address: meetup.address,
       },
+      meetupId,
     },
   };
 }
