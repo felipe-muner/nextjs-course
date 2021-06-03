@@ -36,7 +36,8 @@ export async function getStaticPaths() {
   client.close();
   //use this one if its dynamic[:id] and you have getStaticProps getting data on serverside..
   return {
-    fallback: false, //generate and get then dynamically
+    fallback: 'blocking',
+    //true or blocking - generate on demand and thereafter cache
     //false says you have all path made already
     paths: meetups.map((m) => ({
       params: { meetupId: m._id.toString() },
