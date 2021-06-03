@@ -13,40 +13,46 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 
 export const mainListItems = (
   <div>
-    <Link href="/dashboard" passHref>
+    <Link href="/products" passHref>
       <ListItem button>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText primary="Products" />
       </ListItem>
     </Link>
-    <Link href="/orders" passHref>
+    <Link href="/clients" passHref>
       <ListItem button>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Orders" />
+        <ListItemText primary="Clients" />
       </ListItem>
     </Link>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
+    <Link href="/sellers" passHref>
+      <ListItem button>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Sellers" />
+      </ListItem>
+    </Link>
+    <Link href="/sales" passHref>
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Sales" />
+      </ListItem>
+    </Link>
+    <Link href="/admins" passHref>
+      <ListItem button>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Admins" />
+      </ListItem>
+    </Link>
   </div>
 );
 
