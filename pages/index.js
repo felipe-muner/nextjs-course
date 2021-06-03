@@ -1,23 +1,29 @@
 import MeetupList from "../components/meetups/MeetupList";
+// import useSwr from 'swr'
+// const fetcher = (url) => fetch(url).then((res) => res.json())
 
 const DUMMY_MEETUPS = [
   {
     id: "m1",
     title: "First ",
-    image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
     address: "first street",
     description: "my meetup",
   },
   {
     id: "m2",
     title: "Second ",
-    image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png",
     address: "second street",
     description: "my meetup2",
   },
 ];
 
 function HomePage({ meetups }) {
+  // const { data, error } = useSwr('/api/users', fetcher)
+  // console.log(data)
   return <MeetupList meetups={meetups} />;
 }
 
@@ -34,8 +40,11 @@ function HomePage({ meetups }) {
 // }
 
 export async function getStaticProps() {
-  // const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
-  // const data = await res.json();
+  // const response = await fetch('/api/meetups', {
+  //   method: 'GET'
+  // })
+
+  // const data = await response.json()
 
   return {
     props: {
