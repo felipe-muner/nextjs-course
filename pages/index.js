@@ -1,4 +1,6 @@
+import { MongoClient } from "mongodb"; // only used on server side
 import MeetupList from "../components/meetups/MeetupList";
+import { STRING_CON } from "../constants";
 // import useSwr from 'swr'
 // const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -40,15 +42,22 @@ function HomePage({ meetups }) {
 // }
 
 export async function getStaticProps() {
-  // const response = await fetch('/api/meetups', {
-  //   method: 'GET'
-  // })
+    const client = await MongoClient.connect(STRING_CON);
+    const db = client.db();
+    const meetupsCollection = db.collection("meetups");
 
-  // const data = await response.json()
+    const meetups = await meetupsCollection.find().toArray()
+
+    client.close()
 
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: meetups.map(m => ({
+        id: m._id.toString(),
+        title: m.title,
+        address: m.address,
+        image: m.image
+      }))
     },
     revalidate: 10,
   };
