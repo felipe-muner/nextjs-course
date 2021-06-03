@@ -7,8 +7,6 @@ import { Fragment } from "react";
 // const fetcher = (url) => fetch(url).then((res) => res.json())
 
 function HomePage({ meetups }) {
-  // const { data, error } = useSwr('/api/users', fetcher)
-  // console.log(data)
   return (
     <Fragment>
       <Head>
