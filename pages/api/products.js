@@ -13,6 +13,7 @@ async function handler(req, res) {
     console.log(products);
     products.push(req.body);
     console.log(products);
+    
     res.status(201).json({ message: "Product inserted!" });
     // const { title, image, address } = data;
 
@@ -27,7 +28,6 @@ async function handler(req, res) {
 
     // client.close();
   } else if (req.method === "GET" && req.query.method === 'getAll') {
-    console.log(products)
     res.status(200).json({ products });
   }
 }

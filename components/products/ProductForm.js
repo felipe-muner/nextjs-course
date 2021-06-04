@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import Api from "../../constants/api";
 
 function ProductForm(props) {
   const [query, setQuery] = useState({
@@ -25,13 +26,11 @@ function ProductForm(props) {
   async function handleSubmit(event) {
     event.preventDefault();
     query.method = "addProduct";
-    const res = await fetch("/api/products", {
-      body: JSON.stringify(query),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
+    const res = await Api.post({
+      url: "/api/products",
+      data: query,
     });
+
     setQuery({ name: "", price: "", category: "" });
     console.log(await res.json());
   }
