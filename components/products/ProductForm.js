@@ -49,7 +49,7 @@ function ProductForm(props) {
             autoComplete="none"
             value={query.name}
             onChange={handleParam()}
-            variant="filled"
+            variant="outlined"
           />
         </Box>
         <Box my={2} >
