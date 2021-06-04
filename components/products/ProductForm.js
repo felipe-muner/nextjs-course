@@ -2,9 +2,10 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 
 function ProductForm(props) {
-  console.log(props)
+  console.log(props);
   async function handleSubmit(event) {
     event.preventDefault();
     const res = await fetch("/api/products", {
@@ -23,14 +24,29 @@ function ProductForm(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField id="name" label="Name" fullWidth autoComplete="none" />
-      <TextField id="price" label="Price" fullWidth autoComplete="none" />
-      <TextField id="category" label="Category" fullWidth autoComplete="none" />
-      <Button variant="contained" color="primary" type="submit">
-        Submit
-      </Button>
-    </form>
+    <Box>
+      <form onSubmit={handleSubmit}>
+        <Box>
+          <TextField id="name" label="Name" fullWidth autoComplete="none" />
+        </Box>
+        <Box>
+          <TextField id="price" label="Price" fullWidth autoComplete="none" />
+        </Box>
+        <Box>
+          <TextField
+            id="category"
+            label="Category"
+            fullWidth
+            autoComplete="none"
+          />
+        </Box>
+        <Box mt={2}>
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
+        </Box>
+      </form>
+    </Box>
   );
 }
 

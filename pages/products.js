@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => {
 });
 
 function Products() {
-  
   const classes = useStyles();
 
   return (
