@@ -16,6 +16,7 @@ function ProductForm(props) {
   const handleParam = () => (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    console.log(name, value);
     setQuery((prevState) => ({
       ...prevState,
       [name]: value,
@@ -23,22 +24,16 @@ function ProductForm(props) {
   };
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      return await fetch("/api/products", {
-        body: JSON.stringify(query),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      }).then(async (res) => {
-        console.log(await res.json())
-        setQuery({ name: "", price: "", category: "" })
-      });
-    } catch (error) {
-      console.log(error)
-    }    
-
-    // console.log(await res.json());
+    query.method = "addProduct";
+    const res = await fetch("/api/products", {
+      body: JSON.stringify(query),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+    setQuery({ name: "", price: "", category: "" });
+    console.log(await res.json());
   }
 
   return (
@@ -84,5 +79,18 @@ function ProductForm(props) {
     </Box>
   );
 }
+
+// export async function getStaticProps(context) {
+//   console.log(context)
+//   const res = await fetch("/api/products", { qs: { a: 1, b: 2 } });
+//   const produtcs = await res.json();
+//   console.log(produtcs);
+//   return {
+//     revalidate: 10,
+//     props: {
+//       produtcs,
+//     },
+//   };
+// }
 
 export default ProductForm;
