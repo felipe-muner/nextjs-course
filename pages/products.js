@@ -23,12 +23,12 @@ function Products() {
 
   return (
     <Fragment>
-      <Grid item xs={6}>
+      <Grid item xs={3}>
         <Paper className={classes.paper}>
           <ProductForm />
         </Paper>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={9}>
         <Paper className={classes.paper}>
           <ProductList />
         </Paper>

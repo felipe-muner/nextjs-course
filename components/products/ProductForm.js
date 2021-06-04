@@ -35,10 +35,13 @@ function ProductForm(props) {
     console.log(await res.json());
   }
 
-  return (
+  return (    
     <Box>
+      <Box>
+        <h3>Add Product</h3>
+      </Box>
       <form onSubmit={handleSubmit}>
-        <Box>
+        <Box my={2} >
           <TextField
             name="name"
             label="Name"
@@ -46,9 +49,10 @@ function ProductForm(props) {
             autoComplete="none"
             value={query.name}
             onChange={handleParam()}
+            variant="filled"
           />
         </Box>
-        <Box>
+        <Box my={2} >
           <TextField
             name="price"
             label="Price"
@@ -56,9 +60,10 @@ function ProductForm(props) {
             autoComplete="none"
             value={query.price}
             onChange={handleParam()}
+            variant="outlined"
           />
         </Box>
-        <Box>
+        <Box my={2} >
           <TextField
             name="category"
             label="Category"
@@ -66,6 +71,7 @@ function ProductForm(props) {
             autoComplete="none"
             value={query.category}
             onChange={handleParam()}
+            variant="outlined"
           />
         </Box>
         {JSON.stringify(query)}
