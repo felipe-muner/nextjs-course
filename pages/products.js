@@ -32,13 +32,13 @@ function Products() {
 
   return (
     <Fragment>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={6} lg={3}>
         {JSON.stringify(products)}
         <Paper className={classes.paper}>
           <ProductForm addItem={addItem} />
         </Paper>
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={12} md={6} lg={9}>
         <button onClick={() => calcCount()}>Plus 1</button>
         <Paper className={classes.paper}>
           <ProductList count={count} />
