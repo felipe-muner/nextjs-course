@@ -17,6 +17,8 @@ import Fade from "@material-ui/core/Fade";
 
 import Api from "../../constants/api";
 
+import { useCount } from '../../store/context'
+
 const useStyles = makeStyles((theme) => ({
   fab: {
     margin: theme.spacing(2),
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductList({ count, products }) {
+function ProductList({ products }) {
 
   const classes = useStyles();
 
@@ -43,6 +45,8 @@ function ProductList({ count, products }) {
   const handleDelete = (item) => {
     console.log("The Values that you wish to delete ", item);
   };
+
+  const count = useCount()
 
   return (
     <Box>

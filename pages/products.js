@@ -6,6 +6,8 @@ import ProductForm from "../components/products/ProductForm";
 import ProductList from "../components/products/ProductList";
 import Api from "../constants/api";
 
+import { useCount, useDispatchCount } from "../store/context";
+
 const useStyles = makeStyles((theme) => {
   return {
     root: {
@@ -21,8 +23,10 @@ const useStyles = makeStyles((theme) => {
 
 function Products() {
   const classes = useStyles();
-  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
+
+  const count = useCount();
+  const dispatch = useDispatchCount();
 
   useEffect(async () => {
     const res = await Api.get({
@@ -36,18 +40,38 @@ function Products() {
   const calcCount = () => setCount(count + 1);
   const addItem = (item) => setProducts((products) => [item, ...products]);
 
+  const handleIncrease = (event) =>
+    dispatch({
+      type: "INCREASE",
+    });
+  const handleDecrease = (event) =>
+    dispatch({
+      type: "DECREASE",
+    });
+
   return (
     <Fragment>
       <Grid item xs={12} md={6} lg={3}>
-      {JSON.stringify(products)}
+        {count}
+        <button onClick={handleIncrease}>Increase</button>
+        <button onClick={handleDecrease}>Decrease</button>
+        {JSON.stringify(products)}
         <Paper className={classes.paper}>
           <ProductForm addItem={addItem} />
         </Paper>
       </Grid>
       <Grid item xs={12} md={6} lg={9}>
-        <button onClick={() => calcCount()}>Plus 1</button>
+        <button
+          onClick={() =>
+            dispatch({
+              type: "INCREASE",
+            })
+          }
+        >
+          Plus 1
+        </button>
         <Paper className={classes.paper}>
-          <ProductList count={count} products={products} />
+          <ProductList products={products} />
         </Paper>
       </Grid>
     </Fragment>
