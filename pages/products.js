@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => {
 function Products() {
   const classes = useStyles();
 
+  const felipeProp = 'felipe prop'
+
   return (
     <Fragment>
       <Grid item xs={3}>
@@ -30,7 +32,7 @@ function Products() {
       </Grid>
       <Grid item xs={9}>
         <Paper className={classes.paper}>
-          <ProductList />
+          <ProductList felipe={felipeProp} />
         </Paper>
       </Grid>
     </Fragment>

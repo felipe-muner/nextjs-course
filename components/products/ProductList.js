@@ -28,11 +28,12 @@ const useStyles = makeStyles((theme) => ({
     height: 10,
   },
   tableCell: {
-    padding: "0px 16px"
-  }
+    padding: "0px 16px",
+  },
 }));
 
-function ProductList() {
+function ProductList({ felipe }) {
+  console.log(felipe);
   const [data, setData] = useState({ products: [] });
 
   useEffect(async () => {
@@ -61,23 +62,42 @@ function ProductList() {
       </Box>
       <Box>
         <TableContainer>
-          <Table className={classes.table} aria-label="simple table"  size="small">
+          <Table
+            className={classes.table}
+            aria-label="simple table"
+            size="small"
+          >
             <TableHead>
               <TableRow className={classes.tableRow}>
                 <TableCell className={classes.tableCell}>Name</TableCell>
-                <TableCell className={classes.tableCell} align="right">Category</TableCell>
-                <TableCell className={classes.tableCell} align="right">Price</TableCell>
-                <TableCell className={classes.tableCell} align="right"></TableCell>
+                <TableCell className={classes.tableCell} align="right">
+                  Category
+                </TableCell>
+                <TableCell className={classes.tableCell} align="right">
+                  Price
+                </TableCell>
+                <TableCell
+                  className={classes.tableCell}
+                  align="right"
+                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.products.map((row) => (
                 <TableRow hover key={row.name} className={classes.tableRow}>
-                  <TableCell className={classes.tableCell} component="th" scope="row">
+                  <TableCell
+                    className={classes.tableCell}
+                    component="th"
+                    scope="row"
+                  >
                     {row.name}
                   </TableCell>
-                  <TableCell className={classes.tableCell} align="right">{row.category}</TableCell>
-                  <TableCell className={classes.tableCell} align="right">{row.price}</TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    {row.category}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    {row.price}
+                  </TableCell>
                   <TableCell className={classes.tableCell} align="right">
                     <Tooltip
                       m={1}
@@ -101,7 +121,7 @@ function ProductList() {
                       TransitionComponent={Fade}
                       TransitionProps={{ timeout: 600 }}
                     >
-                      <Fab                        
+                      <Fab
                         size="small"
                         color="secondary"
                         className={classes.fab}
