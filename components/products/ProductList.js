@@ -32,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductList({ felipe }) {
-  console.log(felipe);
+function ProductList({ count }) {
   const [data, setData] = useState({ products: [] });
 
   useEffect(async () => {
@@ -59,6 +58,7 @@ function ProductList({ felipe }) {
     <Box>
       <Box>
         <h3>Product list</h3>
+        {count}
       </Box>
       <Box>
         <TableContainer>

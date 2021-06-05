@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -20,19 +20,21 @@ const useStyles = makeStyles((theme) => {
 
 function Products() {
   const classes = useStyles();
+  const [count, setCount] = useState(0);
 
-  const felipeProp = 'felipe prop'
+  const calcCount = () => setCount(count + 1)
 
   return (
-    <Fragment>
+    <Fragment>      
       <Grid item xs={3}>
         <Paper className={classes.paper}>
           <ProductForm />
         </Paper>
       </Grid>
       <Grid item xs={9}>
+        <button onClick={() => calcCount()}>Plus 1</button>
         <Paper className={classes.paper}>
-          <ProductList felipe={felipeProp} />
+          <ProductList count={count} />
         </Paper>
       </Grid>
     </Fragment>
