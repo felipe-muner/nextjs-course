@@ -24,11 +24,13 @@ function Products() {
 
   const calcCount = () => setCount(count + 1)
 
+  const felipeFather = () => console.log(10)
+
   return (
     <Fragment>      
       <Grid item xs={3}>
         <Paper className={classes.paper}>
-          <ProductForm />
+          <ProductForm newItem={felipeFather} />
         </Paper>
       </Grid>
       <Grid item xs={9}>

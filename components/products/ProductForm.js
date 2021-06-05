@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Api from "../../constants/api";
 
-function ProductForm(props) {
+function ProductForm({ newItem }) {
   const [query, setQuery] = useState({
     name: "",
     price: 0,
@@ -33,15 +33,16 @@ function ProductForm(props) {
 
     setQuery({ name: "", price: "", category: "" });
     console.log(await res.json());
+    newItem()
   }
 
-  return (    
+  return (
     <Box>
       <Box>
         <h3>Add Product</h3>
       </Box>
       <form onSubmit={handleSubmit}>
-        <Box my={2} >
+        <Box my={2}>
           <TextField
             name="name"
             label="Name"
@@ -52,7 +53,7 @@ function ProductForm(props) {
             variant="outlined"
           />
         </Box>
-        <Box my={2} >
+        <Box my={2}>
           <TextField
             name="price"
             label="Price"
@@ -63,7 +64,7 @@ function ProductForm(props) {
             variant="outlined"
           />
         </Box>
-        <Box my={2} >
+        <Box my={2}>
           <TextField
             name="category"
             label="Category"
