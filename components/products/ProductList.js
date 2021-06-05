@@ -32,17 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductList({ count }) {
-  const [data, setData] = useState({ products: [] });
-
-  useEffect(async () => {
-    const res = await Api.get({
-      url: "/api/products",
-      data: { method: "getAll" },
-    });
-    const products = await res.json();
-    setData(products);
-  }, []);
+function ProductList({ count, products }) {
 
   const classes = useStyles();
 
@@ -83,8 +73,8 @@ function ProductList({ count }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.products.map((row) => (
-                <TableRow hover key={row.name} className={classes.tableRow}>
+              {products.map((row) => (
+                <TableRow hover key={row.id} className={classes.tableRow}>
                   <TableCell
                     className={classes.tableCell}
                     component="th"

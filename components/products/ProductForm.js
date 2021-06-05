@@ -34,7 +34,7 @@ function ProductForm({ addItem }) {
     });
 
     delete query.method
-
+    query.id = Math.random()
     setQuery({ name: "", price: "", category: "" });
     console.log(await res.json());
     addItem(query)
