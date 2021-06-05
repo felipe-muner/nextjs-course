@@ -46,7 +46,8 @@ function Products() {
     });
   const handleDecrease = (event) =>
     dispatch({
-      type: "DECREASE",
+      type: "INCREASE_BY",
+      payload: 20
     });
 
   return (
