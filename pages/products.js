@@ -22,15 +22,20 @@ function Products() {
   const classes = useStyles();
   const [count, setCount] = useState(0);
 
-  const calcCount = () => setCount(count + 1)
+  const [products, setProducts] = useState([
+    { name: "felipe" },
+    { name: "felipe2" },
+  ]);
 
-  const felipeFather = () => console.log(10)
+  const calcCount = () => setCount(count + 1);
+  const addItem = (item) => setProducts((products) => [item, ...products]);
 
   return (
-    <Fragment>      
+    <Fragment>
       <Grid item xs={3}>
+        {JSON.stringify(products)}
         <Paper className={classes.paper}>
-          <ProductForm newItem={felipeFather} />
+          <ProductForm addItem={addItem} />
         </Paper>
       </Grid>
       <Grid item xs={9}>

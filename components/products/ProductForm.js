@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Api from "../../constants/api";
 
-function ProductForm({ newItem }) {
+function ProductForm({ addItem }) {
   const [query, setQuery] = useState({
     name: "",
     price: 0,
@@ -23,17 +23,21 @@ function ProductForm({ newItem }) {
       [name]: value,
     }));
   };
+  
   async function handleSubmit(event) {
     event.preventDefault();
     query.method = "addProduct";
+
     const res = await Api.post({
       url: "/api/products",
       data: query,
     });
 
+    delete query.method
+
     setQuery({ name: "", price: "", category: "" });
     console.log(await res.json());
-    newItem()
+    addItem(query)
   }
 
   return (
