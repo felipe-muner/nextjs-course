@@ -4,7 +4,9 @@ function getPageData(dayTrade, pageSize, pageNumber) {
   const firstItem = pageSize * pageNumber - pageSize;
   const lastItem = pageSize * pageNumber - 1;
   // const uniquePeople = [...new Set(dayTrade.map(item => item.user))];
-  // console.log(dayTrade);
+  console.log(dayTrade)
+  console.log(firstItem, lastItem);
+  
   const uniquePeople = dayTrade.reduce((acc, cur) => {
     const found = findByKey(acc, cur, "user");
     found
@@ -12,6 +14,8 @@ function getPageData(dayTrade, pageSize, pageNumber) {
       : acc.push(cur);
     return acc;
   }, []);
+
+  console.log(uniquePeople)
 
   const groupByUser = dayTrade.reduce(function (r, a) {
     r[a.user] = r[a.user] || [];
@@ -45,9 +49,9 @@ var dayTrade = [
 
 
 function Sellers() {
-  const felipe = getPageData(dayTrade, 3, 2);
+  const felipe = getPageData(dayTrade, 3, 1);
   console.log(felipe)
-  return <div>i'm Sellers</div>
+  return <div>{JSON.stringify(felipe)}</div>
 }
 
 export default Sellers
