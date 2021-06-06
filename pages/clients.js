@@ -40,7 +40,7 @@ export default function AlertDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose(false)} color="primary">
+          <Button onClick={() => handleClose()} color="primary">
             Disagree
           </Button>
           <Button onClick={() => handleClose(true)} color="primary" autoFocus>

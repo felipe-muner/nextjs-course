@@ -16,8 +16,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Fade from "@material-ui/core/Fade";
 
 import Api from "../../constants/api";
+import ConfirmationDialog from "../ConfirmationDialog";
 
-import { useCount } from '../../store/context'
+import { useCount } from "../../store/context";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -35,22 +36,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProductList({ products }) {
+  const [openEdit, setOpenEdit] = useState(false);
+  const [selected, setSelected] = useState({});
 
   const classes = useStyles();
 
-  const handleEdit = (item) => {
+  const handleClose = (val) => {
+    setOpenEdit(false);
+  };
+
+  const handleEdit = (item) => {    
     console.log("The Values that you wish to edit ", item);
   };
 
   const handleDelete = (item) => {
+    setSelected(item);
+    setOpenEdit(true);
     console.log("The Values that you wish to delete ", item);
   };
 
-  const count = useCount()
+  const count = useCount();
 
   return (
     <Box>
       <Box>
+        <ConfirmationDialog
+          open={openEdit}
+          onClose={handleClose}
+          setOpenEdit={setOpenEdit}
+          selected={selected}
+        />
         <h3>Product list</h3>
         {count}
       </Box>
