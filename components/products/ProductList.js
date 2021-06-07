@@ -45,7 +45,7 @@ function ProductList({ products }) {
     setOpenDelete(false);
   };
 
-  const handleEdit = (item) => {    
+  const handleEdit = (item) => {
     console.log("The Values that you wish to edit ", item);
   };
 
@@ -116,8 +116,13 @@ function ProductList({ products }) {
                       TransitionComponent={Fade}
                       TransitionProps={{ timeout: 600 }}
                     >
-                      <Fab size="small" color="primary" className={classes.fab}>
-                        <EditIcon onClick={() => handleEdit(row)} />
+                      <Fab
+                        size="small"
+                        color="primary"
+                        className={classes.fab}
+                        onClick={() => handleEdit(row)}
+                      >
+                        <EditIcon />
                       </Fab>
                     </Tooltip>
                     <Tooltip
@@ -133,8 +138,9 @@ function ProductList({ products }) {
                         size="small"
                         color="secondary"
                         className={classes.fab}
+                        onClick={() => handleDelete(row)}
                       >
-                        <DeleteIcon onClick={() => handleDelete(row)} />
+                        <DeleteIcon />
                       </Fab>
                     </Tooltip>
                   </TableCell>
