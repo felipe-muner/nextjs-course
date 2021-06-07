@@ -10,14 +10,14 @@ import PropTypes from "prop-types";
 export default function ConfirmationDialog({
   open,
   onClose,
-  setOpenDelete,
+  setOpenEdit,
   selected,
 }) {
   const handleClose = (val) => {
     if (val) {
       console.log("agree");
     }
-    setOpenDelete(false);
+    setOpenEdit(false);
   };
 
   return (

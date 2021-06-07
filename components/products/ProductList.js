@@ -36,13 +36,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProductList({ products }) {
-  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [selected, setSelected] = useState({});
 
   const classes = useStyles();
 
   const handleClose = (val) => {
-    setOpenEdit(false);
+    setOpenDelete(false);
   };
 
   const handleEdit = (item) => {    
@@ -51,7 +51,7 @@ function ProductList({ products }) {
 
   const handleDelete = (item) => {
     setSelected(item);
-    setOpenEdit(true);
+    setOpenDelete(true);
     console.log("The Values that you wish to delete ", item);
   };
 
@@ -61,9 +61,9 @@ function ProductList({ products }) {
     <Box>
       <Box>
         <ConfirmationDialog
-          open={openEdit}
+          open={openDelete}
           onClose={handleClose}
-          setOpenEdit={setOpenEdit}
+          setOpenDelete={setOpenDelete}
           selected={selected}
         />
         <h3>Product list</h3>
