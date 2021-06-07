@@ -10,14 +10,12 @@ import PropTypes from "prop-types";
 export default function ConfirmationDialog({
   open,
   onClose,
-  setOpenEdit,
   selected,
 }) {
   const handleClose = (val) => {
     if (val) {
       console.log("agree");
     }
-    setOpenEdit(false);
   };
 
   return (
@@ -29,7 +27,7 @@ export default function ConfirmationDialog({
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Edit"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

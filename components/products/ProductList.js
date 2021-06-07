@@ -17,6 +17,7 @@ import Fade from "@material-ui/core/Fade";
 
 import Api from "../../constants/api";
 import ConfirmationDialog from "../ConfirmationDialog";
+import ModalForm from "../products/ModalForm";
 
 import { useCount } from "../../store/context";
 
@@ -36,16 +37,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProductList({ products }) {
+  const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [selected, setSelected] = useState({});
 
   const classes = useStyles();
 
   const handleClose = (val) => {
+    setOpenEdit(false);
     setOpenDelete(false);
   };
 
   const handleEdit = (item) => {
+    setSelected(item);
+    setOpenEdit(true);
     console.log("The Values that you wish to edit ", item);
   };
 
@@ -58,99 +63,106 @@ function ProductList({ products }) {
   const count = useCount();
 
   return (
-    <Box>
+    <>
       <Box>
-        <ConfirmationDialog
-          open={openDelete}
-          onClose={handleClose}
-          selected={selected}
-        />
-        <h3>Product list</h3>
-        {count}
-      </Box>
-      <Box>
-        <TableContainer>
-          <Table
-            className={classes.table}
-            aria-label="simple table"
-            size="small"
-          >
-            <TableHead>
-              <TableRow className={classes.tableRow}>
-                <TableCell className={classes.tableCell}>Name</TableCell>
-                <TableCell className={classes.tableCell} align="right">
-                  Category
-                </TableCell>
-                <TableCell className={classes.tableCell} align="right">
-                  Price
-                </TableCell>
-                <TableCell
-                  className={classes.tableCell}
-                  align="right"
-                ></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {products.map((row) => (
-                <TableRow hover key={row.id} className={classes.tableRow}>
+        <Box>
+          <h3>Product list</h3>
+          {count}
+        </Box>
+        <Box>
+          <TableContainer>
+            <Table
+              className={classes.table}
+              aria-label="simple table"
+              size="small"
+            >
+              <TableHead>
+                <TableRow className={classes.tableRow}>
+                  <TableCell className={classes.tableCell}>Name</TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    Category
+                  </TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    Price
+                  </TableCell>
                   <TableCell
                     className={classes.tableCell}
-                    component="th"
-                    scope="row"
-                  >
-                    {row.name}
-                  </TableCell>
-                  <TableCell className={classes.tableCell} align="right">
-                    {row.category}
-                  </TableCell>
-                  <TableCell className={classes.tableCell} align="right">
-                    {row.price}
-                  </TableCell>
-                  <TableCell className={classes.tableCell} align="right">
-                    <Tooltip
-                      m={1}
-                      title="Edit"
-                      aria-label="edit"
-                      placement="top"
-                      arrow
-                      TransitionComponent={Fade}
-                      TransitionProps={{ timeout: 600 }}
-                    >
-                      <Fab
-                        size="small"
-                        color="primary"
-                        className={classes.fab}
-                        onClick={() => handleEdit(row)}
-                      >
-                        <EditIcon />
-                      </Fab>
-                    </Tooltip>
-                    <Tooltip
-                      m={1}
-                      title="Delete"
-                      aria-label="delete"
-                      placement="top"
-                      arrow
-                      TransitionComponent={Fade}
-                      TransitionProps={{ timeout: 600 }}
-                    >
-                      <Fab
-                        size="small"
-                        color="secondary"
-                        className={classes.fab}
-                        onClick={() => handleDelete(row)}
-                      >
-                        <DeleteIcon />
-                      </Fab>
-                    </Tooltip>
-                  </TableCell>
+                    align="right"
+                  ></TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {products.map((row) => (
+                  <TableRow hover key={row.id} className={classes.tableRow}>
+                    <TableCell
+                      className={classes.tableCell}
+                      component="th"
+                      scope="row"
+                    >
+                      {row.name}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.category}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.price}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      <Tooltip
+                        m={1}
+                        title="Edit"
+                        aria-label="edit"
+                        placement="top"
+                        arrow
+                        TransitionComponent={Fade}
+                        TransitionProps={{ timeout: 600 }}
+                      >
+                        <Fab
+                          size="small"
+                          color="primary"
+                          className={classes.fab}
+                          onClick={() => handleEdit(row)}
+                        >
+                          <EditIcon />
+                        </Fab>
+                      </Tooltip>
+                      <Tooltip
+                        m={1}
+                        title="Delete"
+                        aria-label="delete"
+                        placement="top"
+                        arrow
+                        TransitionComponent={Fade}
+                        TransitionProps={{ timeout: 600 }}
+                      >
+                        <Fab
+                          size="small"
+                          color="secondary"
+                          className={classes.fab}
+                          onClick={() => handleDelete(row)}
+                        >
+                          <DeleteIcon />
+                        </Fab>
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
       </Box>
-    </Box>
+      <ConfirmationDialog
+        open={openDelete}
+        onClose={handleClose}
+        selected={selected}
+      />
+      <ModalForm
+        open={openEdit}
+        onClose={handleClose}
+        selected={selected}
+      />
+    </>
   );
 }
 
