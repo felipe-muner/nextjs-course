@@ -63,7 +63,6 @@ function ProductList({ products }) {
         <ConfirmationDialog
           open={openDelete}
           onClose={handleClose}
-          setOpenDelete={setOpenDelete}
           selected={selected}
         />
         <h3>Product list</h3>
