@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -21,6 +20,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../../constants/listItems';
 
 import { useCount } from "../../store/context";
+import { store } from '../../store/store';
+
 
 // import Chart from './Chart';
 // import Deposits from './Deposits';
@@ -133,6 +134,9 @@ function Layout(props) {
 
   const count = useCount();
 
+  const globalState = useContext(store);
+  console.log(globalState); // this will return { color: red }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -183,7 +187,7 @@ function Layout(props) {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {props.children}            
+            {props.children}
           </Grid>
           <Box pt={4}>
             <Copyright />
