@@ -19,6 +19,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../../constants/listItems';
+
+import { useCount } from "../../store/context";
+
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -128,6 +131,8 @@ function Layout(props) {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+  const count = useCount();
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -145,6 +150,11 @@ function Layout(props) {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
+          <IconButton color="inherit">
+            <Badge badgeContent={count} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />

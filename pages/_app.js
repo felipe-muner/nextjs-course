@@ -30,11 +30,11 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Layout>
-          <ContextProvider>
+        <ContextProvider>
+          <Layout>
             <Component {...pageProps} />
-          </ContextProvider>
-        </Layout>
+          </Layout>
+        </ContextProvider>
       </ThemeProvider>
     </React.Fragment>
   );
