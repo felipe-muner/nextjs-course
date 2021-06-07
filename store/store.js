@@ -1,23 +1,33 @@
-import React, {createContext, useReducer} from 'react';
+import { useReducer, useContext, createContext } from "react";
 
-const initialState = {felipe:10};
-const store = createContext(initialState);
-const { Provider } = store;
-
-const StateProvider = ( { children } ) => {
-  const [state, dispatch] = useReducer((state, action) => {
-    switch(action.type) {
-      case 'action description':
-        console.log('action description')
-        console.log(state)
-        const newState = 10
-        return newState;
-      default:
-        throw new Error();
-    };
-  }, initialState);
-
-  return <Provider value={{ state, dispatch }}>{children}</Provider>;
+const initialState = {
+  products: [{ nome: "luiza" }],
 };
 
-export { store, StateProvider }
+const ProductsStateContext = createContext();
+const ProductsDispatchContext = createContext();
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "INCREASE":
+      const newState = { products: [...state.products, { nome: "felipe" }] };
+      console.log(newState.products.length);
+      return newState;
+    default:
+      throw new Error(`Unknown action: ${action.type}`);
+  }
+};
+
+export const ProductProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <ProductsDispatchContext.Provider value={dispatch}>
+      <ProductsStateContext.Provider value={state}>
+        {children}
+      </ProductsStateContext.Provider>
+    </ProductsDispatchContext.Provider>
+  );
+};
+
+export const productsStore = () => useContext(ProductsStateContext);
+export const productsDispatch = () => useContext(ProductsDispatchContext);

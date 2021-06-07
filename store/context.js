@@ -2,7 +2,6 @@ import { useReducer, useContext, createContext } from "react";
 
 const CounterStateContext = createContext();
 const CounterDispatchContext = createContext();
-const StateContext = createContext({ user: {} });
 
 const reducer = (state, action) => {
   switch (action.type) {

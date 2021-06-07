@@ -20,7 +20,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../../constants/listItems';
 
 import { useCount } from "../../store/context";
-import { store } from '../../store/store';
+import { productsStore } from '../../store/store';
 
 
 // import Chart from './Chart';
@@ -133,9 +133,7 @@ function Layout(props) {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const count = useCount();
-
-  const globalState = useContext(store);
-  console.log(globalState); // this will return { color: red }
+  const products = productsStore();
 
   return (
     <div className={classes.root}>
@@ -154,6 +152,7 @@ function Layout(props) {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
+          <Box>{JSON.stringify(products)}</Box>
           <IconButton color="inherit">
             <Badge badgeContent={count} color="secondary">
               <NotificationsIcon />

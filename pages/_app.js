@@ -7,8 +7,9 @@ import theme from "../src/theme";
 import Layout from "../components/layout/Layout";
 
 import { ContextProvider } from "../store/context";
+import { ProductProvider } from "../store/store";
 
-import { StateProvider } from "../store/store";
+// import { StateProvider } from "../store/store";
 export default function MyApp(props) {
   const { Component, pageProps } = props;
 
@@ -32,13 +33,13 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <StateProvider>
+        <ProductProvider>
           <ContextProvider>
             <Layout>
               <Component {...pageProps} />
             </Layout>
           </ContextProvider>
-        </StateProvider>
+        </ProductProvider>
       </ThemeProvider>
     </React.Fragment>
   );
