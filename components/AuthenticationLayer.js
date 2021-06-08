@@ -4,6 +4,9 @@ import Login from "./Login";
 
 export default function AuthenticationLayer({ children }) {
   const users = usersStore();
+  const dispatchUser = usersDispatch();
+  console.log(users);
+  
   const login = () => {
     dispatchUser({
       type: "LOGIN",
@@ -16,17 +19,15 @@ export default function AuthenticationLayer({ children }) {
     });
   };
 
-  console.log(users);
-  const dispatchUser = usersDispatch();
   return (
     <div>
       <h1> Auth layer</h1>
       <Button onClick={() => login()} color="primary">
-          Log in
-        </Button>
-        <Button onClick={() => logout()} color="primary">
-          Log out
-        </Button>
+        Log in
+      </Button>
+      <Button onClick={() => logout()} color="primary">
+        Log out
+      </Button>
 
       {"felipe" + " - " + users.loggedIn}
       <br />

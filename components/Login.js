@@ -5,7 +5,7 @@ export default function Login() {
   const dispatchUser = usersDispatch();
   return (
     <div>
-      <h1> Lgoin</h1>
+      <h1> Login</h1>
     </div>
   );
 }
