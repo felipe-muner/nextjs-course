@@ -21,6 +21,7 @@ import { mainListItems, secondaryListItems } from '../../constants/listItems';
 
 import { useCount } from "../../store/context";
 import { productsStore } from '../../store/store';
+import { usersStore, usersDispatch } from '../../store/users';
 
 
 // import Chart from './Chart';
@@ -135,6 +136,21 @@ function Layout(props) {
   const count = useCount();
   const products = productsStore();
 
+  const users = usersStore();
+  const dispatchUser = usersDispatch();
+
+  const login = () => {
+    dispatchUser({
+      type: "LOGIN",
+    });
+  };
+
+  const logout = () => {
+    dispatchUser({
+      type: "LOGOUT",
+    });
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -153,6 +169,7 @@ function Layout(props) {
             Dashboard
           </Typography>
           <Box>{JSON.stringify(products)}</Box>
+          <Box>{JSON.stringify(users)}</Box>
           <IconButton color="inherit">
             <Badge badgeContent={count} color="secondary">
               <NotificationsIcon />
