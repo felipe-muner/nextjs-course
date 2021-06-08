@@ -8,6 +8,7 @@ import Layout from "../components/layout/Layout";
 
 import { ContextProvider } from "../store/context";
 import { ProductProvider } from "../store/store";
+import { UserProvider } from "../store/users";
 
 // import { StateProvider } from "../store/store";
 export default function MyApp(props) {
@@ -33,13 +34,15 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <ProductProvider>
-          <ContextProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ContextProvider>
-        </ProductProvider>
+        <UserProvider>
+          <ProductProvider>
+            <ContextProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ContextProvider>
+          </ProductProvider>
+        </UserProvider>
       </ThemeProvider>
     </React.Fragment>
   );

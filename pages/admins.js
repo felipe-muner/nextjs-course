@@ -1,22 +1,36 @@
 import React, { useContext } from "react";
 import { productsStore, productsDispatch } from "../store/store";
+import { usersStore, usersDispatch } from "../store/users";
 import Button from "@material-ui/core/Button";
 
 function Admins() {
-
-
   const products = productsStore();
-  const dispatch = productsDispatch();
+  const dispatchProduct = productsDispatch();
+
+  const users = usersStore();
+  const dispatchUser = usersDispatch();
 
   const add = () => {
-    dispatch({
+    dispatchProduct({
       type: "INCREASE",
     });
   };
 
   const remove = () => {
-    dispatch({
+    dispatchProduct({
       type: "DECREASE",
+    });
+  };
+
+  const login = () => {
+    dispatchUser({
+      type: "LOGIN",
+    });
+  };
+
+  const logout = () => {
+    dispatchUser({
+      type: "LOGOUT",
     });
   };
   // dispatch({ type: 'INCREASE' })
@@ -30,6 +44,23 @@ function Admins() {
         Remove Last
       </Button>
       {JSON.stringify(products)}
+      <br />
+      <br />
+      <br />
+      <hr />
+      <br />
+      <br />
+      <h1> Users Login example Context Api </h1>
+      <div>
+        users
+        {JSON.stringify(users)}
+        <Button onClick={() => login()} color="primary">
+          Log in
+        </Button>
+        <Button onClick={() => logout()} color="primary">
+          Log out
+        </Button>
+      </div>
     </div>
   );
 }
