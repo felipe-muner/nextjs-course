@@ -7,9 +7,8 @@ import theme from "../src/theme";
 import Layout from "../components/layout/Layout";
 import AuthenticationLayer from "../components/AuthenticationLayer";
 
-import { ContextProvider } from "../store/context";
-import { ProductProvider } from "../store/store";
 import { UserProvider } from "../store/users";
+import { RootProvider } from "../store/rootProvider";
 
 // import { StateProvider } from "../store/store";
 export default function MyApp(props) {
@@ -37,13 +36,11 @@ export default function MyApp(props) {
         <CssBaseline />
         <UserProvider>
           <AuthenticationLayer>
-            <ProductProvider>
-              <ContextProvider>
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </ContextProvider>
-            </ProductProvider>
+            <RootProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </RootProvider>
           </AuthenticationLayer>
         </UserProvider>
       </ThemeProvider>
