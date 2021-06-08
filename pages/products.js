@@ -28,14 +28,17 @@ function Products() {
   const count = useCount();
   const dispatch = useDispatchCount();
 
-  useEffect(async () => {
-    const res = await Api.get({
-      url: "/api/products",
-      data: {},
-    });
-    const products = await res.json();
-    setProducts(products);
-  }, [products]);
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const res = await Api.get({
+        url: "/api/products",
+        data: {},
+      });
+      const products = await res.json();
+      setProducts(products);
+    }
+    fetchMyAPI()
+  }, []);
 
   const calcCount = () => setCount(count + 1);
   const addItem = (item) => setProducts((products) => [item, ...products]);

@@ -134,7 +134,7 @@ function Layout(props) {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const count = useCount();
-  console.log(count)
+  
   const products = productsStore();
 
   const users = usersStore();
