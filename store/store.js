@@ -10,7 +10,7 @@ const ProductsDispatchContext = createContext();
 const reducer = (state, action) => {
   switch (action.type) {
     case "INCREASE":
-      const newState = { products: [...state.products, { nome: "felipe" }] };
+      const newState = { products: [...state.products, { name: "felipe" }] };
       console.log(newState.products.length);
       return newState;
     case "DECREASE":
@@ -18,6 +18,7 @@ const reducer = (state, action) => {
       const removed = {
         products: [...state.products].filter((el) => el.name !== "felipe"),
       };
+      debugger;
       console.log(removed);
       return removed;
     default:
