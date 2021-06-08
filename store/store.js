@@ -1,7 +1,7 @@
 import { useReducer, useContext, createContext } from "react";
 
 const initialState = {
-  products: [{ nome: "luiza" }],
+  products: [{ name: "luiza" }, { name: "jose" }, { name: "marly" }],
 };
 
 const ProductsStateContext = createContext();
@@ -13,6 +13,13 @@ const reducer = (state, action) => {
       const newState = { products: [...state.products, { nome: "felipe" }] };
       console.log(newState.products.length);
       return newState;
+    case "DECREASE":
+      debugger;
+      const removed = {
+        products: [...state.products].filter((el) => el.name !== "felipe"),
+      };
+      console.log(removed);
+      return removed;
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }

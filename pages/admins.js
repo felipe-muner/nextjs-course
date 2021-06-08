@@ -8,18 +8,26 @@ function Admins() {
   const products = productsStore();
   const dispatch = productsDispatch();
 
-  const addNumber = () => {
-    console.log("toindo");
+  const add = () => {
     dispatch({
       type: "INCREASE",
     });
   };
-  // dispatch({ type: 'ADD_NUMBER' })
+
+  const remove = () => {
+    dispatch({
+      type: "DECREASE",
+    });
+  };
+  // dispatch({ type: 'INCREASE' })
 
   return (
     <div>
-      <Button onClick={() => addNumber()} color="primary">
-        Add 10
+      <Button onClick={() => add()} color="primary">
+        Add Object
+      </Button>
+      <Button onClick={() => remove()} color="primary">
+        Remove Last
       </Button>
       {JSON.stringify(products)}
     </div>
