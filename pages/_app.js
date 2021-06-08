@@ -37,13 +37,13 @@ export default function MyApp(props) {
         <CssBaseline />
         <UserProvider>
           <AuthenticationLayer>
-            <Layout>
-              <ProductProvider>
-                <ContextProvider>
+            <ProductProvider>
+              <ContextProvider>
+                <Layout>
                   <Component {...pageProps} />
-                </ContextProvider>
-              </ProductProvider>
-            </Layout>
+                </Layout>
+              </ContextProvider>
+            </ProductProvider>
           </AuthenticationLayer>
         </UserProvider>
       </ThemeProvider>
