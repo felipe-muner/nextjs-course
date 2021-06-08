@@ -17,6 +17,7 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import CancelPresentationTwoToneIcon from '@material-ui/icons/CancelPresentationTwoTone';
 import { mainListItems, secondaryListItems } from '../../constants/listItems';
 
 import { useCount } from "../../store/context";
@@ -131,20 +132,15 @@ function Layout(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const count = useCount();
-  
+
   const products = productsStore();
 
   const users = usersStore();
   const dispatchUser = usersDispatch();
-
-  const login = () => {
-    dispatchUser({
-      type: "LOGIN",
-    });
-  };
 
   const logout = () => {
     dispatchUser({
@@ -176,9 +172,9 @@ function Layout(props) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+          <IconButton color="inherit" onClick={logout}>
+            <Badge color="secondary">
+              <CancelPresentationTwoToneIcon />
             </Badge>
           </IconButton>
         </Toolbar>
