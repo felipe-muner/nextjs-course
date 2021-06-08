@@ -1,9 +1,7 @@
-import React from "react";
-
-import Login from "../components/Login";
+import LoginComp from "../components/Login";
 
 export default function Login() {
-  return <Login />;
+  return <LoginComp />;
 }
 
 Login.getInitialProps = async ({ req }) => {
