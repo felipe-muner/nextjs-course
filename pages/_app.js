@@ -5,6 +5,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import Layout from "../components/layout/Layout";
+import AuthenticationLayer from "../components/AuthenticationLayer";
 
 import { ContextProvider } from "../store/context";
 import { ProductProvider } from "../store/store";
@@ -35,13 +36,15 @@ export default function MyApp(props) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <UserProvider>
-          <ProductProvider>
-            <ContextProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </ContextProvider>
-          </ProductProvider>
+          <AuthenticationLayer>
+            <Layout>
+              <ProductProvider>
+                <ContextProvider>
+                  <Component {...pageProps} />
+                </ContextProvider>
+              </ProductProvider>
+            </Layout>
+          </AuthenticationLayer>
         </UserProvider>
       </ThemeProvider>
     </React.Fragment>
