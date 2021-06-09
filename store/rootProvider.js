@@ -1,8 +1,9 @@
 import { ContextProvider } from "../store/context";
 import { ProductProvider } from "../store/store";
 
+//IMPORT ALL CONTEXT HERE TO MAKE IT AVAILABLE ALL OVER THE APP
+
 export const RootProvider = ({ children }) => {
-  console.log(21321312);
   return (
     <ProductProvider>
       <ContextProvider>{children}</ContextProvider>
