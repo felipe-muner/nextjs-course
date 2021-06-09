@@ -46,7 +46,7 @@ class Clock extends Component {
         <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
         <h3>{this.state.timerID}</h3>
         <h3>{JSON.stringify(this.state)}</h3>
-        <Felipe name={"felip2e"} />
+        <Felipe name={"felip2e"} counter={this.counter}/>
         <button onClick={() => this.felipe()}>change counter</button>
       </div>
     );
