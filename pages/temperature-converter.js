@@ -36,11 +36,8 @@ class TemperatureInput extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {}
-
   handleChange(e) {
     // this.setState({ temperature: e.target.value });
-    debugger
     this.props.onTemperatureChange(e.target.value);
   }
 
@@ -62,7 +59,22 @@ class Calculator extends Component {
     super(props);
     this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
     this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
-    this.state = { temperature: "", scale: "" };
+    this.state = { temperature: "", scale: "", myNumber: "" };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    console.log(new Date().getSeconds())
+    this.setState({
+      myNumber: new Date().getSeconds(),
+    });
   }
 
   handleCelsiusChange(temperature) {
@@ -73,8 +85,7 @@ class Calculator extends Component {
     this.setState({ scale: "f", temperature });
   }
 
-  render() {
-    console.log('render')
+  render() {    
     const scale = this.state.scale;
     const temperature = this.state.temperature;
 
@@ -94,6 +105,7 @@ class Calculator extends Component {
           scale="f"
           temperature={fahrenheit}
           onTemperatureChange={this.handleFahrenheitChange}
+          felipe={new Date().getTime() % 2 === 0 ? "even" : "odd"}
         />
         <BoilingVerdict celsius={parseFloat(celsius)} />
       </div>
