@@ -1,7 +1,7 @@
 import { useReducer, useContext, createContext } from "react";
 
 const initialState = {
-  loggedIn: false,
+  loggedIn: true,
 };
 
 const UserStateContext = createContext();

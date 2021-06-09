@@ -8,7 +8,7 @@ function GuestGreeting(props) {
   return <h1>Please sign up.</h1>;
 }
 
-function IfElseComp(props) {
+const IfElseComp = (props) => {
   if (props.isLogged) {
     return <UserGreeting />;
   }
@@ -17,7 +17,8 @@ function IfElseComp(props) {
 
 export default function Conditional() {  
   const [isLogged, setIsLogged] = useState(false);
-
+  // const count = 0
+const count = 1
   const toggleLogin = () => {
     setIsLogged(prev => !prev)
     console.log("this is:", isLogged);
@@ -27,6 +28,9 @@ export default function Conditional() {
     <>
       <IfElseComp isLogged={isLogged} />
       <button onClick={() => toggleLogin()}>toggle activity</button>
+      <div>
+      { count && <h1>Messages: {count}</h1>}
+    </div>
     </>
   );
 }
