@@ -17,7 +17,7 @@ const IfElseComp = (props) => {
 
 export default function Conditional() {
   const [isLogged, setIsLogged] = useState(false);
-  const [felipeSelect, setFelipeSelect] = useState('grapefruit');
+  const [felipeSelect, setFelipeSelect] = useState('lime');
   // const count = 0
   const count = 0;
   const felipeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((el) => (
