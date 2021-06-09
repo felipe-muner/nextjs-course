@@ -13,7 +13,15 @@ class Felipe extends Component {
 class Clock extends Component {
   constructor(props) {
     super(props);
-    this.state = { date: new Date(), counter: 0 };
+    this.state = { date: new Date(), counter: 0, isToggleOn: true };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState((prevState) => ({
+      isToggleOn: !prevState.isToggleOn,
+    }));
   }
 
   componentDidMount() {
@@ -32,7 +40,7 @@ class Clock extends Component {
 
   felipe() {
     this.setState((state) => {
-      console.log(state)
+      console.log(state);
       return {
         counter: state.counter + 1,
       };
@@ -46,8 +54,11 @@ class Clock extends Component {
         <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
         <h3>{this.state.timerID}</h3>
         <h3>{JSON.stringify(this.state)}</h3>
-        <Felipe name={"felip2e"} counter={this.counter}/>
+        <Felipe name={"felip2e"} counter={this.counter} />
         <button onClick={() => this.felipe()}>change counter</button>
+        <button onClick={this.handleClick}>
+          {this.state.isToggleOn ? "ON" : "OFF"}
+        </button>
       </div>
     );
   }
