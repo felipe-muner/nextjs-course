@@ -47,6 +47,10 @@ class Clock extends Component {
     });
   }
 
+  buttonThree = () => {
+    console.log('this state is:', this.state);
+  }
+
   render() {
     return (
       <div>
@@ -58,6 +62,9 @@ class Clock extends Component {
         <button onClick={() => this.felipe()}>change counter</button>
         <button onClick={this.handleClick}>
           {this.state.isToggleOn ? "ON" : "OFF"}
+        </button>
+        <button onClick={this.buttonThree}>
+          public class fields syntax
         </button>
       </div>
     );
