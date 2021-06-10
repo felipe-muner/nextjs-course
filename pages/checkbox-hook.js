@@ -1,51 +1,75 @@
-import { useState, useEffect, useCallback } from "react";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  formControl: {
+    margin: theme.spacing(3),
+  },
+}));
 
-const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
-  console.log("Checkbox: ", name, checked);
+export default function CheckboxesGroup() {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    gilad: true,
+    jason: false,
+    antoine: false,
+  });
 
-  return (
-    <input type={type} name={name} checked={checked} onChange={onChange} />
-  );
-};
-
-export default function CheckboxExample() {
-  const [checkedItems, setCheckedItems] = useState({});
-
-  const handleChange = event => {
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.name]: event.target.checked
-    });
-    console.log("checkedItems: ", checkedItems);
+  const handleChange = (event) => {
+    console.log(event.target)
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-  const checkboxes = [
-    {
-      name: "check-box-1",
-      key: "checkBox1",
-      label: "Check Box 1"
-    },
-    {
-      name: "check-box-2",
-      key: "checkBox2",
-      label: "Check Box 2"
-    }
-  ];
+  const { gilad, jason, antoine } = state;
+  const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
 
   return (
-    <div>
-      <lable>Checked item name : {checkedItems["check-box-1"]} </lable> <br />
-      {checkboxes.map(item => (
-        <label key={item.key}>
-          {item.name}
-          <Checkbox
-            name={item.name}
-            checked={checkedItems[item.name]}
-            onChange={handleChange}
+    <div className={classes.root}>
+      <FormControl component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend">Assign responsibility</FormLabel>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox checked={gilad} onChange={handleChange} name="gilad" />}
+            label="Gilad Gray"
           />
-        </label>
-      ))}
+          <FormControlLabel
+            control={<Checkbox checked={jason} onChange={handleChange} name="jason" />}
+            label="Jason Killian"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={antoine} onChange={handleChange} name="antoine" />}
+            label="Antoine Llorca"
+          />
+        </FormGroup>
+        <FormHelperText>Be careful</FormHelperText>
+      </FormControl>
+      <FormControl required error={error} component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend">Pick two</FormLabel>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox checked={gilad} onChange={handleChange} name="gilad" />}
+            label="Gilad Gray"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={jason} onChange={handleChange} name="jason" />}
+            label="Jason Killian"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={antoine} onChange={handleChange} name="antoine" />}
+            label="Antoine Llorca"
+          />
+        </FormGroup>
+        <FormHelperText>You can display an error</FormHelperText>
+      </FormControl>
     </div>
   );
-};
+}
