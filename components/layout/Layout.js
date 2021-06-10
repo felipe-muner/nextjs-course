@@ -21,7 +21,7 @@ import CancelPresentationTwoToneIcon from '@material-ui/icons/CancelPresentation
 import { mainListItems, secondaryListItems } from '../../constants/listItems';
 
 import { useCount } from "../../store/context";
-import { productsStore } from '../../store/store';
+import { productsStore } from '../../store/products';
 import { usersStore, usersDispatch } from '../../store/users';
 
 
