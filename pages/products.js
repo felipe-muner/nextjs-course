@@ -47,12 +47,11 @@ function Products() {
   //   });
   // const toggleView = (val) => setIsTableView((products) => [item, ...products]);
   const handleOpenModal = (val) => {
-    console.log(val)
     setOpenModal(val)
   }
+
   return (
     <Fragment>
-    {openModal}
       <Grid item container xs={12} md={12} lg={6}>
         <Box xs={12}>
           <ButtonGroup
@@ -60,13 +59,13 @@ function Products() {
             aria-label="outlined primary button group"
           >
             <Tooltip title="List View">
-              <Button variant="contained" startIcon={<ViewList />}>
+              <Button variant="contained" startIcon={<ViewList />} onClick={() => setIsTableView('list')}>
                 List
               </Button>
             </Tooltip>
 
             <Tooltip title="Card View">
-              <Button variant="contained" startIcon={<ViewWeekRoundedIcon />}>
+              <Button variant="contained" startIcon={<ViewWeekRoundedIcon />} onClick={() => setIsTableView('card')}>
                 Card
               </Button>
             </Tooltip>
@@ -86,7 +85,7 @@ function Products() {
         </Box>
       </Grid>
       <Grid item xs={12} md={12} lg={12}>
-        {isTableView ? (
+        {isTableView === 'list' ? (
           <ProductList products={products} setOpenModal={handleOpenModal} />
         ) : (
           <ProductCard />
