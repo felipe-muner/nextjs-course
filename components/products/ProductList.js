@@ -66,10 +66,6 @@ function ProductList({ products }) {
     <>
       <Box>
         <Box>
-          <h3>Product list</h3>
-          {count}
-        </Box>
-        <Box>
           <TableContainer>
             <Table
               className={classes.table}
