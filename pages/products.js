@@ -6,41 +6,26 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Box from "@material-ui/core/Box";
 import Tooltip from "@material-ui/core/Tooltip";
-import Zoom from "@material-ui/core/Zoom";
 import ViewList from "@material-ui/icons/ViewList";
 import ViewWeekRoundedIcon from "@material-ui/icons/ViewWeekRounded";
 import Add from "@material-ui/icons/Add";
 
 import ProductList from "../components/products/ProductList";
 import ProductCard from "../components/products/ProductCard";
+import ProductModal from "../components/products/ProductModal";
 import Api from "../constants/api";
 
-import { useCount, useDispatchCount } from "../store/context";
-
-const useStyles = makeStyles((theme) => {
-  return {
-    root: {
-      between: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: "center",
-      color: theme.palette.text.secondary,
-    },
-    felipe: {
-      marginLeft: 5,
-    },
-  };
-});
+// import { useCount, useDispatchCount } from "../store/context";
 
 function Products() {
-  const classes = useStyles();
-  const [products, setProducts] = useState([]);
+  const [openModal, setOpenModal] = useState("");
+  const [selected, setSelected] = useState({});
   const [isTableView, setIsTableView] = useState(true);
-  const [isModalOpen, setisModalOpen] = useState(false);
 
-  const count = useCount();
-  const dispatch = useDispatchCount();
+  const [products, setProducts] = useState([]);
+
+  // const count = useCount();
+  // const dispatch = useDispatchCount();
 
   useEffect(() => {
     async function fetchMyAPI() {
@@ -54,7 +39,6 @@ function Products() {
     fetchMyAPI();
   }, []);
 
-  const openModal = () => setCount(count + 1);
   // const addItem = (item) => setProducts((products) => [item, ...products]);
 
   // const handleIncrease = (event) =>
@@ -62,9 +46,13 @@ function Products() {
   //     type: "INCREASE",
   //   });
   // const toggleView = (val) => setIsTableView((products) => [item, ...products]);
-
+  const handleOpenModal = (val) => {
+    console.log(val)
+    setOpenModal(val)
+  }
   return (
-    <Fragment m={0}>
+    <Fragment>
+    {openModal}
       <Grid item container xs={12} md={12} lg={6}>
         <Box xs={12}>
           <ButtonGroup
@@ -86,17 +74,30 @@ function Products() {
         </Box>
         <Box ml={2} xs={12}>
           <Tooltip title="Add">
-            <Button variant="contained" color="secondary" startIcon={<Add />}>
+            <Button
+              onClick={() => handleOpenModal("add")}
+              variant="contained"
+              color="secondary"
+              startIcon={<Add />}
+            >
               Add
             </Button>
           </Tooltip>
         </Box>
       </Grid>
-
-      <Grid>{isModalOpen}</Grid>
       <Grid item xs={12} md={12} lg={12}>
-        {isTableView ? <ProductList products={products} /> : <ProductCard />}
+        {isTableView ? (
+          <ProductList products={products} setOpenModal={handleOpenModal} />
+        ) : (
+          <ProductCard />
+        )}
       </Grid>
+      {/* <ConfirmationDialog
+        open={openDelete}
+        onClose={handleClose}
+        selected={selected}
+      /> */}
+      {/* <ProductModal open={openModal === 'add'} onClose={handleClose} selected={selected} /> */}
     </Fragment>
   );
 }

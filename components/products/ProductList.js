@@ -17,7 +17,7 @@ import Fade from "@material-ui/core/Fade";
 
 import Api from "../../constants/api";
 import ConfirmationDialog from "../ConfirmationDialog";
-import ModalForm from "../products/ModalForm";
+import ModalForm from "./ProductModal";
 
 import { useCount } from "../../store/context";
 
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductList({ products }) {
+function ProductList({ products, setOpenModal }) {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [selected, setSelected] = useState({});
@@ -44,19 +44,19 @@ function ProductList({ products }) {
   const classes = useStyles();
 
   const handleClose = (val) => {
-    setOpenEdit(false);
+    setOpenModal('');
     setOpenDelete(false);
   };
 
   const handleEdit = (item) => {
     setSelected(item);
-    setOpenEdit(true);
+    setOpenModal('edit');
     console.log("The Values that you wish to edit ", item);
   };
 
   const handleDelete = (item) => {
     setSelected(item);
-    setOpenDelete(true);
+    setOpenModal('delete');
     console.log("The Values that you wish to delete ", item);
   };
 
