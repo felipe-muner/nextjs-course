@@ -11,6 +11,7 @@ export default function ConfirmationDialog({
   open,
   onClose,
   selected,
+  label
 }) {
   const handleClose = (val) => {
     if (val) {
@@ -27,7 +28,7 @@ export default function ConfirmationDialog({
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Edit"}
+          {label}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

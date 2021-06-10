@@ -20,7 +20,7 @@ import Api from "../constants/api";
 function Products() {
   const [openModal, setOpenModal] = useState("");
   const [selected, setSelected] = useState({});
-  const [isTableView, setIsTableView] = useState(true);
+  const [isTableView, setIsTableView] = useState("list");
 
   const [products, setProducts] = useState([]);
 
@@ -47,8 +47,8 @@ function Products() {
   //   });
   // const toggleView = (val) => setIsTableView((products) => [item, ...products]);
   const handleOpenModal = (val) => {
-    setOpenModal(val)
-  }
+    setOpenModal(val);
+  };
 
   return (
     <Fragment>
@@ -59,13 +59,21 @@ function Products() {
             aria-label="outlined primary button group"
           >
             <Tooltip title="List View">
-              <Button variant="contained" startIcon={<ViewList />} onClick={() => setIsTableView('list')}>
+              <Button
+                variant="contained"
+                startIcon={<ViewList />}
+                onClick={() => setIsTableView("list")}
+              >
                 List
               </Button>
             </Tooltip>
 
             <Tooltip title="Card View">
-              <Button variant="contained" startIcon={<ViewWeekRoundedIcon />} onClick={() => setIsTableView('card')}>
+              <Button
+                variant="contained"
+                startIcon={<ViewWeekRoundedIcon />}
+                onClick={() => setIsTableView("card")}
+              >
                 Card
               </Button>
             </Tooltip>
@@ -85,18 +93,18 @@ function Products() {
         </Box>
       </Grid>
       <Grid item xs={12} md={12} lg={12}>
-        {isTableView === 'list' ? (
+        {isTableView === "list" ? (
           <ProductList products={products} setOpenModal={handleOpenModal} />
         ) : (
           <ProductCard />
         )}
       </Grid>
-      {/* <ConfirmationDialog
-        open={openDelete}
-        onClose={handleClose}
+      <ProductModal
+        open={openModal === "add"}
+        label={"Add"}
+        onClose={() => setOpenModal("")}
         selected={selected}
-      /> */}
-      {/* <ProductModal open={openModal === 'add'} onClose={handleClose} selected={selected} /> */}
+      />
     </Fragment>
   );
 }
