@@ -8,6 +8,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import StorageIcon from "@material-ui/icons/Storage";
 
 import ProductList from "../components/products/ProductList";
+import ProductCard from "../components/products/ProductCard";
 import Api from "../constants/api";
 
 import { useCount, useDispatchCount } from "../store/context";
@@ -21,6 +22,12 @@ const useStyles = makeStyles((theme) => {
       padding: theme.spacing(2),
       textAlign: "center",
       color: theme.palette.text.secondary,
+    },
+    button: {
+      // main styles,
+      "&.active": {
+        background: "black",
+      },
     },
   };
 });
@@ -52,7 +59,7 @@ function Products() {
   //   dispatch({
   //     type: "INCREASE",
   //   });
-  const toggleView = (val) => setIsTableView((products) => [item, ...products]);
+  // const toggleView = (val) => setIsTableView((products) => [item, ...products]);
 
   return (
     <Fragment>
@@ -62,17 +69,24 @@ function Products() {
           color="primary"
           aria-label="outlined primary button group"
         >
-          <Button onClick={() => setIsTableView(true)}>
+          {/* className={isActive ? 'your_className': null} */}
+          <Button
+            className={isTableView ? "active" : null}
+            onClick={() => setIsTableView(true)}
+          >
             <StorageIcon />
           </Button>
-          <Button onClick={() => setIsTableView(false)}>
+          <Button
+            className={!isTableView ? "active" : null}
+            onClick={() => setIsTableView(false)}
+          >
             <EditIcon />
           </Button>
         </ButtonGroup>
       </Grid>
       <Grid item xs={12} md={12} lg={12}>
         <Paper className={classes.paper}>
-          <ProductList products={products} />
+          {isTableView ? <ProductList products={products} /> : <ProductCard />}
         </Paper>
       </Grid>
     </Fragment>
