@@ -89,7 +89,7 @@ function ProductList({ products }) {
               </TableHead>
               <TableBody>
                 {products.map((row) => (
-                  <TableRow hover key={row.id} className={classes.tableRow}>
+                  <TableRow key={row.id} className={classes.tableRow}>
                     <TableCell
                       className={classes.tableCell}
                       component="th"
