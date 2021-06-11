@@ -8,7 +8,7 @@ let products = [
     price: 10,
     category: "software",
     amount: 30,
-    active: 1,
+    active: true,
   },
   {
     id: id++,
@@ -16,7 +16,7 @@ let products = [
     price: 5,
     category: "hardware",
     amount: 40,
-    active: 1,
+    active: true,
   },
   {
     id: id++,
@@ -24,7 +24,7 @@ let products = [
     price: 10,
     category: "hardware",
     amount: 50,
-    active: 0,
+    active: false,
   },
   {
     id: id++,
@@ -32,7 +32,7 @@ let products = [
     price: 330,
     category: "hardware",
     amount: 60,
-    active: 1,
+    active: true,
   },
 ];
 
@@ -48,7 +48,7 @@ async function handler(req, res) {
     console.log("putinz");
     console.log(req.body);
     const updated = products.map((p) =>
-      p.id === req.body.id ? { ...req.body, updated: true } : p
+      p.id === req.body.id ? { ...req.body } : p
     );
     products = [...updated];
     res.status(201).json({ message: "Product updated!", product: req.body });

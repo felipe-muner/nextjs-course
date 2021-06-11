@@ -15,7 +15,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Fade from "@material-ui/core/Fade";
 
-import Api from "../../constants/api";
 import ConfirmationDialog from "../ConfirmationDialog";
 import ProductModal from "./ProductModal";
 
@@ -44,13 +43,11 @@ function ProductList({ products, setOpenModal, openModal, initComp }) {
   const handleEdit = (item) => {
     setSelected(item);
     setOpenModal("edit");
-    console.log("The Values that you wish to edit ", item);
   };
 
   const handleDelete = (item) => {
     setSelected(item);
     setOpenModal("delete");
-    console.log("The Values that you wish to delete ", item);
   };
 
   const count = useCount();
@@ -68,7 +65,7 @@ function ProductList({ products, setOpenModal, openModal, initComp }) {
               <TableHead>
                 <TableRow className={classes.tableRow}>
                   <TableCell className={classes.tableCell}>Name</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align="left">
                     Category
                   </TableCell>
                   <TableCell className={classes.tableCell} align="right">
@@ -76,6 +73,9 @@ function ProductList({ products, setOpenModal, openModal, initComp }) {
                   </TableCell>
                   <TableCell className={classes.tableCell} align="right">
                     Amount
+                  </TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    Active
                   </TableCell>
                   <TableCell
                     className={classes.tableCell}
@@ -93,7 +93,7 @@ function ProductList({ products, setOpenModal, openModal, initComp }) {
                     >
                       {row.name}
                     </TableCell>
-                    <TableCell className={classes.tableCell} align="right">
+                    <TableCell className={classes.tableCell} align="left">
                       {row.category}
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
@@ -101,6 +101,9 @@ function ProductList({ products, setOpenModal, openModal, initComp }) {
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
                       {row.amount}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {"" + row.active}
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
                       <Tooltip
@@ -158,6 +161,7 @@ function ProductList({ products, setOpenModal, openModal, initComp }) {
         open={openModal === "delete"}
         onClose={() => setOpenModal("")}
         selected={selected}
+        initComp={initComp}
       />      
     </>
   );

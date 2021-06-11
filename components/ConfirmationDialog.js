@@ -6,17 +6,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import PropTypes from "prop-types";
+import Api from "../constants/api";
 
 export default function ConfirmationDialog({
   open,
   onClose,
   selected,
+  initComp,
 }) {
-  const handleClose = (val) => {
+  const handleClose = async (val) => {
     if (val) {
-      console.log("agree");
+      const res = await Api.product.update({
+        ...selected,
+        active: !selected.active,
+      });
+      initComp();
     }
-    onClose()
+
+    onClose();
   };
 
   return (
@@ -31,7 +38,7 @@ export default function ConfirmationDialog({
           {"Confirm to delete?"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">            
+          <DialogContentText id="alert-dialog-description">
             {JSON.stringify(selected)}
           </DialogContentText>
         </DialogContent>
