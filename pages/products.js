@@ -14,9 +14,6 @@ import ProductList from "../components/products/ProductList";
 import ProductCard from "../components/products/ProductCard";
 import ProductModal from "../components/products/ProductModal";
 import Api from "../constants/api";
-import MyApi from "../constants/MyApi";
-
-import { ctxProducts, dispatchProducts } from "../store/products";
 
 function Products() {
   const [openModal, setOpenModal] = useState("");
@@ -24,13 +21,12 @@ function Products() {
   const [isTableView, setIsTableView] = useState("list");
 
   const [products, setProducts] = useState([]);
-
-  const prod1 = ctxProducts();
-  const prodDispatch1 = dispatchProducts();
+  const [loading, setLoading] = useState(true);
 
   async function initComp() {
     const products = await Api.product.getAll();
     setProducts(products);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -47,6 +43,11 @@ function Products() {
   const handleOpenModal = (val) => {
     setOpenModal(val);
   };
+
+  if(loading){
+    return (<h1>Loading...</h1>) 
+  }
+
 
   return (
     <Fragment>
@@ -91,18 +92,7 @@ function Products() {
         </Box>
       </Grid>
       <Grid>
-        <div>
-          <button onClick={() => prodDispatch1({ type: "INCREASE" })}>
-            Add
-          </button>
-          <button onClick={() => prodDispatch1({ type: "DECREASE" })}>
-            Remove
-          </button>
-          <button onClick={() => prodDispatch1({ type: "GET_ALL" })}>
-            GETALL
-          </button>
-        </div>
-        <div>{JSON.stringify(prod1)}</div>
+        <div>{JSON.stringify(loading)}</div>
       </Grid>
       <Grid item xs={12} md={12} lg={12}>
         {isTableView === "list" ? (
