@@ -33,13 +33,6 @@ function Products() {
     initComp();
   }, []);
 
-  const addItem = (item) => initComp();
-
-  // const handleIncrease = (event) =>
-  //   dispatch({
-  //     type: "INCREASE",
-  //   });
-  // const toggleView = (val) => setIsTableView((products) => [item, ...products]);
   const handleOpenModal = (val) => {
     setOpenModal(val);
   };
@@ -97,7 +90,7 @@ function Products() {
       <Grid item xs={12} md={12} lg={12}>
         {isTableView === "list" ? (
           <ProductList
-            addItem={addItem}
+            initComp={initComp}
             products={products}
             openModal={openModal}
             setOpenModal={handleOpenModal}
@@ -110,7 +103,7 @@ function Products() {
         open={openModal === "add"}
         label={"add"}
         onClose={() => setOpenModal("")}
-        addItem={addItem}
+        initComp={initComp}
       />
     </Fragment>
   );

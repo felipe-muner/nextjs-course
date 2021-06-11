@@ -13,7 +13,7 @@ export default function ProductModal({
   onClose,
   selected = {},
   label,
-  addItem,
+  initComp,
 }) {
   const initialState = {
     name: "",
@@ -46,7 +46,7 @@ export default function ProductModal({
       ? await Api.product.update(query)
       : await Api.product.add(query);
 
-    addItem();
+    initComp();
     onClose();
   }
 
