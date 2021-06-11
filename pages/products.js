@@ -15,6 +15,10 @@ import ProductCard from "../components/products/ProductCard";
 import ProductModal from "../components/products/ProductModal";
 import Api from "../constants/api";
 
+console.log('123')
+console.log(Api)
+console.log('123')
+
 // import { useCount, useDispatchCount } from "../store/context";
 
 function Products() {
@@ -26,20 +30,16 @@ function Products() {
 
   // const count = useCount();
   // const dispatch = useDispatchCount();
+  async function initComp() {
+    const products = await Api.getAll();
+    setProducts(products);
+  }
 
-  useEffect(() => {
-    async function fetchMyAPI() {
-      const res = await Api.get({
-        url: "/api/products",
-        data: {},
-      });
-      const products = await res.json();
-      setProducts(products);
-    }
-    fetchMyAPI();
+  useEffect(() => {    
+    initComp()
   }, []);
 
-  const addItem = (item) => setProducts((products) => [item, ...products]);
+  const addItem = (item) => initComp()
 
   // const handleIncrease = (event) =>
   //   dispatch({
