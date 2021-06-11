@@ -29,8 +29,6 @@ function Products() {
   // const dispatch = useDispatchCount();
   async function initComp() {
     const products = await Api.product.getAll();
-    await Api.product.update()
-    await Api.product.toggleActivity()
     setProducts(products);
   }
 
@@ -93,7 +91,7 @@ function Products() {
       </Grid>
       <Grid item xs={12} md={12} lg={12}>
         {isTableView === "list" ? (
-          <ProductList products={products} openModal={openModal} setOpenModal={handleOpenModal} />
+          <ProductList addItem={addItem} products={products} openModal={openModal} setOpenModal={handleOpenModal} />
         ) : (
           <ProductCard />
         )}

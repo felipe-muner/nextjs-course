@@ -44,15 +44,12 @@ export default function ProductModal({
   async function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(label, "12312321");
+    const res = query.id
+      ? await Api.product.update(query)
+      : await Api.product.add(query);
 
-    // const res = query.id
-    //   ? await Api.product.update(query)
-    //   : await Api.product.add(query);
-
-    // setQuery(initialState);
-    // addItem(res.product);
-    // onClose();
+    addItem();
+    onClose();
   }
 
   return (

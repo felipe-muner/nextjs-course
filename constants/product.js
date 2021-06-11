@@ -27,16 +27,7 @@ class Product {
   async update(payload) {
     const res = await fetcher.put({
       url: "/api/products",
-      data: { felipe: 987654 },
-    });
-    const data = await res.json()
-    return data
-  }
-
-  async toggleActivity(payload) {
-    const res = await fetcher.delete({
-      url: "/api/products",
-      data: { felipe: 987654 },
+      data: payload,
     });
     const data = await res.json()
     return data

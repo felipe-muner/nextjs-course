@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductList({ products, setOpenModal, openModal }) {  
+function ProductList({ products, setOpenModal, openModal, addItem }) {  
   const [selected, setSelected] = useState({});
 
   const classes = useStyles();
@@ -152,6 +152,7 @@ function ProductList({ products, setOpenModal, openModal }) {
         label={"edit"}
         onClose={() => setOpenModal("")}
         selected={selected}
+        addItem={addItem}
       />
       <ConfirmationDialog
         open={openModal === "delete"}

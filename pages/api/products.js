@@ -20,7 +20,11 @@ async function handler(req, res) {
   } else if (req.method === "PUT") {
     console.log("putinz");
     console.log(req.body);
-    res.status(200).json(products);
+    const updated = products.map((p) =>
+      p.id === req.body.id ? { ...req.body, updated: true } : p
+    );
+    products = [...updated]
+    res.status(201).json({ message: "Product updated!", product: req.body });
   } else if (req.method === "DELETE") {
     console.log("DELETE");
     console.log(req.query);
