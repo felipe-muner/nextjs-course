@@ -29,6 +29,8 @@ function Products() {
   // const dispatch = useDispatchCount();
   async function initComp() {
     const products = await Api.product.getAll();
+    await Api.product.update()
+    await Api.product.toggleActivity()
     setProducts(products);
   }
 

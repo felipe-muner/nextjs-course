@@ -116,7 +116,7 @@ function ProductList({ products, setOpenModal, openModal }) {
                       >
                         <Fab
                           size="small"
-                          color="primary"
+                          color="secondary"
                           className={classes.fab}
                           onClick={() => handleEdit(row)}
                         >

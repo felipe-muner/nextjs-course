@@ -9,7 +9,6 @@ let products = [
 ];
 
 async function handler(req, res) {
-  console.log(req);
   if (req.method === "POST") {
     req.body.id = id++;
     console.log(products);
