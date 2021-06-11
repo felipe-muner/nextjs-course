@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { productsStore, productsDispatch } from "../store/store";
 import { usersStore, usersDispatch } from "../store/users";
 import Button from "@material-ui/core/Button";
 
