@@ -16,7 +16,8 @@ import ProductModal from "../components/products/ProductModal";
 import Api from "../constants/api";
 import MyApi from "../constants/MyApi";
 
-// import { useCount, useDispatchCount } from "../store/context";
+import { useCount, useDispatchCount } from "../store/context";
+import { ctxProducts, dispatchProducts } from "../store/products";
 
 function Products() {
   const [openModal, setOpenModal] = useState("");
@@ -25,18 +26,19 @@ function Products() {
 
   const [products, setProducts] = useState([]);
 
-  // const count = useCount();
-  // const dispatch = useDispatchCount();
+  const prod1 = ctxProducts();
+  const prodDispatch1 = dispatchProducts();
+
   async function initComp() {
     const products = await Api.product.getAll();
     setProducts(products);
   }
 
-  useEffect(() => {    
-    initComp()
+  useEffect(() => {
+    initComp();
   }, []);
 
-  const addItem = (item) => initComp()
+  const addItem = (item) => initComp();
 
   // const handleIncrease = (event) =>
   //   dispatch({
@@ -89,9 +91,25 @@ function Products() {
           </Tooltip>
         </Box>
       </Grid>
+      <Grid>
+        <div>
+        <button onClick={() => prodDispatch1({ type: "INCREASE" })}>
+            Add
+          </button>
+          <button onClick={() => prodDispatch1({ type: "DECREASE" })}>
+            Remove
+          </button>
+        </div>
+        <div>{JSON.stringify(prod1)}</div>
+      </Grid>
       <Grid item xs={12} md={12} lg={12}>
         {isTableView === "list" ? (
-          <ProductList addItem={addItem} products={products} openModal={openModal} setOpenModal={handleOpenModal} />
+          <ProductList
+            addItem={addItem}
+            products={products}
+            openModal={openModal}
+            setOpenModal={handleOpenModal}
+          />
         ) : (
           <ProductCard />
         )}

@@ -11,15 +11,14 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "INCREASE":
       const newState = { products: [...state.products, { name: "felipe" }] };
-      console.log(newState.products.length);
+      console.log('newstateincrease')
+      console.log(newState);
+      console.log('newstateincrease')
       return newState;
     case "DECREASE":
-      debugger;
       const removed = {
         products: [...state.products].filter((el) => el.name !== "felipe"),
       };
-      debugger;
-      console.log(removed);
       return removed;
     default:
       throw new Error(`Unknown action: ${action.type}`);
@@ -37,5 +36,5 @@ export const ProductProvider = ({ children }) => {
   );
 };
 
-export const productsStore = () => useContext(ProductsStateContext);
-export const productsDispatch = () => useContext(ProductsDispatchContext);
+export const ctxProducts = () => useContext(ProductsStateContext);
+export const dispatchProducts = () => useContext(ProductsDispatchContext);
