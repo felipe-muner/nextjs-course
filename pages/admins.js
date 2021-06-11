@@ -39,7 +39,6 @@ function Admins() {
       <Button onClick={() => remove()} color="primary">
         Remove Last
       </Button>
-      {JSON.stringify(products)}
       <br />
       <br />
       <br />
