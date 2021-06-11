@@ -35,7 +35,6 @@ function Products() {
 
   useEffect(() => {
     initComp();
-    prodDispatch1({ type: "GET_ALL" });
   }, []);
 
   const addItem = (item) => initComp();
@@ -98,6 +97,9 @@ function Products() {
           </button>
           <button onClick={() => prodDispatch1({ type: "DECREASE" })}>
             Remove
+          </button>
+          <button onClick={() => prodDispatch1({ type: "GET_ALL" })}>
+            GETALL
           </button>
         </div>
         <div>{JSON.stringify(prod1)}</div>

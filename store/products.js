@@ -1,4 +1,5 @@
 import { useReducer, useContext, createContext } from "react";
+import Api from "../constants/api";
 
 const initialState = {
   products: [{ name: "luiza" }, { name: "jose" }, { name: "marly" }],
@@ -11,9 +12,6 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "INCREASE":
       const newState = { products: [...state.products, { name: "felipe" }] };
-      console.log("newstateincrease");
-      console.log(newState);
-      console.log("newstateincrease");
       return newState;
     case "DECREASE":
       const removed = {
@@ -21,7 +19,8 @@ const reducer = (state, action) => {
       };
       return removed;
     case "GET_ALL":
-      console.log('123fele')
+      const list = Api.product.getAll();
+      console.log(list)
       const res = {
         products: [],
       };
