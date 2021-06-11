@@ -17,7 +17,7 @@ import Fade from "@material-ui/core/Fade";
 
 import Api from "../../constants/api";
 import ConfirmationDialog from "../ConfirmationDialog";
-import ModalForm from "./ProductModal";
+import ProductModal from "./ProductModal";
 
 import { useCount } from "../../store/context";
 
@@ -36,27 +36,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductList({ products, setOpenModal }) {
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
+function ProductList({ products, setOpenModal, openModal }) {  
   const [selected, setSelected] = useState({});
 
   const classes = useStyles();
 
-  const handleClose = (val) => {
-    setOpenModal('');
-    setOpenDelete(false);
-  };
+  console.log(products)
 
   const handleEdit = (item) => {
     setSelected(item);
-    setOpenModal('edit');
+    setOpenModal("edit");
     console.log("The Values that you wish to edit ", item);
   };
 
   const handleDelete = (item) => {
     setSelected(item);
-    setOpenModal('delete');
+    setOpenModal("delete");
     console.log("The Values that you wish to delete ", item);
   };
 
@@ -155,13 +150,14 @@ function ProductList({ products, setOpenModal }) {
         </Box>
       </Box>
       <ConfirmationDialog
-        open={openDelete}
-        onClose={handleClose}
+        open={openModal === "delete"}
+        onClose={() => setOpenModal("")}
         selected={selected}
       />
-      <ModalForm
-        open={openEdit}
-        onClose={handleClose}
+      <ProductModal
+        open={openModal === "edit"}
+        label={"Edit"}
+        onClose={() => setOpenModal("")}
         selected={selected}
       />
     </>

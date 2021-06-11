@@ -11,11 +11,7 @@ import PropTypes from "prop-types";
 import Api from "../../constants/api";
 
 export default function ProductModal({ open, onClose, selected, label, addItem }) {
-  const handleClose = (val) => {
-    if (val) {
-      console.log("agree");
-    }
-  };
+
   const initialState = {
     name: "",
     price: "",
@@ -45,8 +41,9 @@ export default function ProductModal({ open, onClose, selected, label, addItem }
     });
 
     setQuery(initialState);
-    console.log(await res.json());
-    addItem(query)
+    const data = await res.json() 
+    addItem(data.product)
+    onClose()
     
   }
 
@@ -113,7 +110,7 @@ export default function ProductModal({ open, onClose, selected, label, addItem }
                   variant="outlined"
                 />
               </Box>
-              <Box mt={2}>
+              <Box my={2}>
                 <Button fullWidth variant="contained" color="primary" type="submit">
                   Submit
                 </Button>

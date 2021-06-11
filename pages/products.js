@@ -94,7 +94,7 @@ function Products() {
       </Grid>
       <Grid item xs={12} md={12} lg={12}>
         {isTableView === "list" ? (
-          <ProductList products={products} setOpenModal={handleOpenModal} />
+          <ProductList products={products} openModal={openModal} setOpenModal={handleOpenModal} />
         ) : (
           <ProductCard />
         )}
@@ -103,7 +103,6 @@ function Products() {
         open={openModal === "add"}
         label={"Add"}
         onClose={() => setOpenModal("")}
-        selected={selected}
         addItem={addItem}
       />
     </Fragment>

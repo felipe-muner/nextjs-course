@@ -15,7 +15,7 @@ async function handler(req, res) {
     console.log(products);
     products.push(req.body);
     console.log(products);
-    res.status(201).json({ message: "Product inserted!" });
+    res.status(201).json({ message: "Product inserted!", product: req.body });
   } else if (req.method === "GET") {
     res.status(200).json(products);
   } else if (req.method === "PUT") {
