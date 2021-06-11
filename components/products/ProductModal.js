@@ -62,6 +62,7 @@ export default function ProductModal({ open, onClose, selected, label }) {
         <form onSubmit={handleSubmit}>
               <Box my={2}>
                 <TextField
+                  required
                   name="name"
                   type="text"
                   label="Name"
@@ -74,6 +75,7 @@ export default function ProductModal({ open, onClose, selected, label }) {
               </Box>
               <Box my={2}>
                 <TextField
+                  required
                   name="price"
                   type="number"
                   label="Price"
@@ -86,6 +88,7 @@ export default function ProductModal({ open, onClose, selected, label }) {
               </Box>
               <Box my={2}>
                 <TextField
+                  required
                   name="category"
                   type="text"
                   label="Category"
@@ -98,6 +101,7 @@ export default function ProductModal({ open, onClose, selected, label }) {
               </Box>
               <Box my={2}>
                 <TextField
+                  required
                   name="amount"
                   type="number"
                   label="Amount"
@@ -108,22 +112,13 @@ export default function ProductModal({ open, onClose, selected, label }) {
                   variant="outlined"
                 />
               </Box>
-              {JSON.stringify(query)}
               <Box mt={2}>
-                <Button variant="contained" color="primary" type="submit">
+                <Button fullWidth variant="contained" color="primary" type="submit">
                   Submit
                 </Button>
               </Box>
             </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => handleClose(false)} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={() => handleClose(true)} color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
