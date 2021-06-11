@@ -39,7 +39,7 @@ function Products() {
     fetchMyAPI();
   }, []);
 
-  // const addItem = (item) => setProducts((products) => [item, ...products]);
+  const addItem = (item) => setProducts((products) => [item, ...products]);
 
   // const handleIncrease = (event) =>
   //   dispatch({
@@ -104,6 +104,7 @@ function Products() {
         label={"Add"}
         onClose={() => setOpenModal("")}
         selected={selected}
+        addItem={addItem}
       />
     </Fragment>
   );

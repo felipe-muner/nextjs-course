@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import PropTypes from "prop-types";
 import Api from "../../constants/api";
 
-export default function ProductModal({ open, onClose, selected, label }) {
+export default function ProductModal({ open, onClose, selected, label, addItem }) {
   const handleClose = (val) => {
     if (val) {
       console.log("agree");
@@ -46,6 +46,7 @@ export default function ProductModal({ open, onClose, selected, label }) {
 
     setQuery(initialState);
     console.log(await res.json());
+    addItem(query)
     
   }
 
