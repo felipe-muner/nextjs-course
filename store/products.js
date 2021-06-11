@@ -19,6 +19,7 @@ const reducer = (state, action) => {
       };
       return removed;
     case "GET_ALL":
+      // AWAIT ISSUE - I NEED TO SET UP AWAIT HERE BUT I CANNOT SET UP ASYNC TO THIS FUNCTION
       const list = Api.product.getAll();
       console.log(list)
       const res = {
