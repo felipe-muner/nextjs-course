@@ -16,7 +16,6 @@ import ProductModal from "../components/products/ProductModal";
 import Api from "../constants/api";
 import MyApi from "../constants/MyApi";
 
-import { useCount, useDispatchCount } from "../store/context";
 import { ctxProducts, dispatchProducts } from "../store/products";
 
 function Products() {
@@ -36,6 +35,7 @@ function Products() {
 
   useEffect(() => {
     initComp();
+    prodDispatch1({ type: "GET_ALL" });
   }, []);
 
   const addItem = (item) => initComp();
@@ -93,7 +93,7 @@ function Products() {
       </Grid>
       <Grid>
         <div>
-        <button onClick={() => prodDispatch1({ type: "INCREASE" })}>
+          <button onClick={() => prodDispatch1({ type: "INCREASE" })}>
             Add
           </button>
           <button onClick={() => prodDispatch1({ type: "DECREASE" })}>

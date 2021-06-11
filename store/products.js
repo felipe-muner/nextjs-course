@@ -11,15 +11,21 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "INCREASE":
       const newState = { products: [...state.products, { name: "felipe" }] };
-      console.log('newstateincrease')
+      console.log("newstateincrease");
       console.log(newState);
-      console.log('newstateincrease')
+      console.log("newstateincrease");
       return newState;
     case "DECREASE":
       const removed = {
         products: [...state.products].filter((el) => el.name !== "felipe"),
       };
       return removed;
+    case "GET_ALL":
+      console.log('123fele')
+      const res = {
+        products: [],
+      };
+      return res;
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
