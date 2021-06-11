@@ -1,4 +1,3 @@
-import {useEffect} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,8 +11,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-import Api from "../constants/api";
 
 import { usersStore, usersDispatch } from "../store/users";
 
@@ -54,27 +51,6 @@ export default function SignIn() {
   const users = usersStore();
   const dispatchUser = usersDispatch();
 
-  useEffect(() => {
-    async function fetchPutApi() {
-      const res = await Api.put({
-        url: "/api/products",
-        data: { felipe: 987654 },
-      });
-  
-      const products = await res.json();
-    }
-    fetchPutApi();
-  
-    async function fetchDeleteApi() {
-      const res = await Api.delete({
-        url: "/api/products",
-        data: { felipe: 987654 },
-      });
-  
-      const products = await res.json();
-    }
-    fetchDeleteApi();  
-  }, []);  
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatchUser({
