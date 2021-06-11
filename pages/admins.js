@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
 import { usersStore, usersDispatch } from "../store/users";
 import Button from "@material-ui/core/Button";
 
 function Admins() {
-  const products = productsStore();
-  const dispatchProduct = productsDispatch();
 
   const users = usersStore();
   const dispatchUser = usersDispatch();
