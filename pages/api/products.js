@@ -39,7 +39,7 @@ let products = [
 async function handler(req, res) {
   if (req.method === "POST") {
     req.body.id = id++;
-    req.body.active = 1;
+    req.body.active = true;
     products.push(req.body);
     res.status(201).json({ message: "Product inserted!", product: req.body });
   } else if (req.method === "GET") {
