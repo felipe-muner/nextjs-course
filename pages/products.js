@@ -100,7 +100,7 @@ function Products() {
       </Grid>
       <ProductModal
         open={openModal === "add"}
-        label={"Add"}
+        label={"add"}
         onClose={() => setOpenModal("")}
         addItem={addItem}
       />

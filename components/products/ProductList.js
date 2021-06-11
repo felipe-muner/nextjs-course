@@ -41,8 +41,6 @@ function ProductList({ products, setOpenModal, openModal }) {
 
   const classes = useStyles();
 
-  console.log(products)
-
   const handleEdit = (item) => {
     setSelected(item);
     setOpenModal("edit");
@@ -149,17 +147,17 @@ function ProductList({ products, setOpenModal, openModal }) {
           </TableContainer>
         </Box>
       </Box>
+      <ProductModal
+        open={openModal === "edit"}
+        label={"edit"}
+        onClose={() => setOpenModal("")}
+        selected={selected}
+      />
       <ConfirmationDialog
         open={openModal === "delete"}
         onClose={() => setOpenModal("")}
         selected={selected}
-      />
-      <ProductModal
-        open={openModal === "edit"}
-        label={"Edit"}
-        onClose={() => setOpenModal("")}
-        selected={selected}
-      />
+      />      
     </>
   );
 }
