@@ -21,7 +21,6 @@ import CancelPresentationTwoToneIcon from '@material-ui/icons/CancelPresentation
 import { mainListItems, secondaryListItems } from '../../constants/listItems';
 
 import { useCount } from "../../store/context";
-import { productsStore } from '../../store/products';
 import { usersStore, usersDispatch } from '../../store/users';
 
 
@@ -139,8 +138,6 @@ function Layout(props) {
 
   const count = useCount();
 
-  const products = productsStore();
-
   const users = usersStore();
   const dispatchUser = usersDispatch();
 
@@ -167,7 +164,6 @@ function Layout(props) {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
-          <Box>{JSON.stringify(products)}</Box>
           <Box>{JSON.stringify(users)}</Box>
           <IconButton color="inherit">
             <Badge badgeContent={count} color="secondary">
