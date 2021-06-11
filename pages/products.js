@@ -14,10 +14,7 @@ import ProductList from "../components/products/ProductList";
 import ProductCard from "../components/products/ProductCard";
 import ProductModal from "../components/products/ProductModal";
 import Api from "../constants/api";
-
-console.log('123')
-console.log(Api)
-console.log('123')
+import MyApi from "../constants/MyApi";
 
 // import { useCount, useDispatchCount } from "../store/context";
 
@@ -31,7 +28,7 @@ function Products() {
   // const count = useCount();
   // const dispatch = useDispatchCount();
   async function initComp() {
-    const products = await Api.getAll();
+    const products = await Api.product.getAll();
     setProducts(products);
   }
 

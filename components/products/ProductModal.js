@@ -34,7 +34,7 @@ export default function ProductModal({ open, onClose, selected, label, addItem }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const res = await Api.add(query);
+    const res = await Api.product.add(query);
     setQuery(initialState);
     addItem(res.product)
     onClose()    
