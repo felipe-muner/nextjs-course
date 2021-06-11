@@ -81,6 +81,9 @@ function ProductList({ products, setOpenModal }) {
                   <TableCell className={classes.tableCell} align="right">
                     Price
                   </TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    Amount
+                  </TableCell>
                   <TableCell
                     className={classes.tableCell}
                     align="right"
@@ -102,6 +105,9 @@ function ProductList({ products, setOpenModal }) {
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
                       {row.price}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.amount}
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
                       <Tooltip

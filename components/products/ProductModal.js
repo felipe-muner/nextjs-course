@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import PropTypes from "prop-types";
+import Api from "../../constants/api";
 
 export default function ProductModal({ open, onClose, selected, label }) {
   const handleClose = (val) => {
@@ -15,13 +16,14 @@ export default function ProductModal({ open, onClose, selected, label }) {
       console.log("agree");
     }
   };
-
-  const [query, setQuery] = useState({
+  const initialState = {
     name: "",
     price: "",
     category: "",
     amount: "",
-  });
+  }
+
+  const [query, setQuery] = useState(initialState);
 
   // Update inputs value
   const handleParam = () => (e) => {
@@ -36,18 +38,15 @@ export default function ProductModal({ open, onClose, selected, label }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    query.method = "addProduct";
 
     const res = await Api.post({
       url: "/api/products",
       data: query,
     });
 
-    delete query.method;
-    query.id = Math.random();
-    setQuery({ name: "", price: "", category: "" });
+    setQuery(initialState);
     console.log(await res.json());
-    addItem(query);
+    
   }
 
   return (

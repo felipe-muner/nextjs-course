@@ -26,7 +26,6 @@ function ProductForm({ addItem }) {
   
   async function handleSubmit(event) {
     event.preventDefault();
-    query.method = "addProduct";
 
     const res = await Api.post({
       url: "/api/products",
