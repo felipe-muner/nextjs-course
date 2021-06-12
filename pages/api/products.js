@@ -4,7 +4,7 @@ let id = 1;
 let products = [
   {
     id: id++,
-    name: "Antivirus",
+    name: Math.random(),
     price: 10,
     category: "software",
     amount: 30,
@@ -12,7 +12,7 @@ let products = [
   },
   {
     id: id++,
-    name: "Mouse",
+    name: Math.random(),
     price: 5,
     category: "hardware",
     amount: 40,
@@ -59,7 +59,12 @@ async function handler(req, res) {
     products.push(req.body);
     res.status(201).json({ message: "Product inserted!", product: req.body });
   } else if (req.method === "GET") {
-    res.status(200).json(products);
+
+    function function2() {
+      res.status(200).json(products);
+    }
+
+    setTimeout(function2, 2000);
   } else if (req.method === "PUT") {
     console.log("putinz");
     console.log(req.body);
