@@ -10,6 +10,8 @@ import AuthenticationLayer from "../components/AuthenticationLayer";
 import { UserProvider } from "../store/users";
 import { RootProvider } from "../store/rootProvider";
 
+import { SWRConfig } from 'swr';
+
 // import { StateProvider } from "../store/store";
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -37,9 +39,16 @@ export default function MyApp(props) {
         <UserProvider>
           <AuthenticationLayer>
             <RootProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <SWRConfig
+                value={{
+                  fetcher: (...args) =>
+                    fetch(...args).then((res) => res.json()),
+                }}
+              >
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </SWRConfig>
             </RootProvider>
           </AuthenticationLayer>
         </UserProvider>

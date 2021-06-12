@@ -11,11 +11,11 @@ import TableRow from "@material-ui/core/TableRow";
 //trigger get data again
 //mutate, get cache first and get data again
 import Api from "../constants/api";
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+//const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function ShowLength() {
   //can pass prop but just to do the exercise
-  const { data } = useSWR("/api/products", fetcher);
+  const { data } = useSWR("/api/products");
   return <h1> {data?.length}</h1>;
 }
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SWRExample() {
-  const { data } = useSWR("/api/products", fetcher);
+  const { data } = useSWR("/api/products");
   const classes = useStyles();
 
   const getProduct = async () => {
