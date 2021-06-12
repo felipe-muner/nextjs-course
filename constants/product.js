@@ -32,6 +32,15 @@ class Product {
     const data = await res.json()
     return data
   }
+  async delete(payload){
+    console.log(payload,'felipeee')
+    const res = await fetcher.delete({
+      url: "/api/products",
+      data: payload,
+    });
+    const data = await res.json()
+    return data
+  }
 
   felipe(){
     console.log('zxcasd')

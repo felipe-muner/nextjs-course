@@ -18,38 +18,38 @@ let products = [
     amount: 40,
     active: true,
   },
-  // {
-  //   id: id++,
-  //   name: "Keyboard",
-  //   price: 10,
-  //   category: "hardware",
-  //   amount: 50,
-  //   active: false,
-  // },
-  // {
-  //   id: id++,
-  //   name: "Monitor",
-  //   price: 330,
-  //   category: "hardware",
-  //   amount: 1,
-  //   active: true,
-  // },
-  // {
-  //   id: id++,
-  //   name: "Monitor2",
-  //   price: 22,
-  //   category: "hardware2",
-  //   amount: 60,
-  //   active: true,
-  // },
-  // {
-  //   id: id++,
-  //   name: "Monitor2",
-  //   price: 3303,
-  //   category: "hardware2",
-  //   amount: 60,
-  //   active: true,
-  // },
+  {
+    id: id++,
+    name: "Keyboard",
+    price: 10,
+    category: "hardware",
+    amount: 50,
+    active: false,
+  },
+  {
+    id: id++,
+    name: "Monitor",
+    price: 330,
+    category: "hardware",
+    amount: 1,
+    active: true,
+  },
+  {
+    id: id++,
+    name: "Monitor2",
+    price: 22,
+    category: "hardware2",
+    amount: 60,
+    active: true,
+  },
+  {
+    id: id++,
+    name: "Monitor3",
+    price: 3303,
+    category: "hardware2",
+    amount: 60,
+    active: true,
+  },
 ];
 
 async function handler(req, res) {
@@ -59,12 +59,7 @@ async function handler(req, res) {
     products.push(req.body);
     res.status(201).json({ message: "Product inserted!", product: req.body });
   } else if (req.method === "GET") {
-
-    function function2() {
-      res.status(200).json(products);
-    }
-
-    setTimeout(function2, 2000);
+    res.status(200).json(products);
   } else if (req.method === "PUT") {
     console.log("putinz");
     console.log(req.body);
@@ -75,7 +70,12 @@ async function handler(req, res) {
     res.status(201).json({ message: "Product updated!", product: req.body });
   } else if (req.method === "DELETE") {
     console.log("DELETE");
-    console.log(req.query);
+    const deleted = products.filter((p) => p.id !== parseInt(req.query.id));
+    console.log(deleted);
+
+    products = [...deleted];
+    console.log(products);
+
     res.status(200).json(products);
   }
 }

@@ -22,7 +22,7 @@ function ShowLength() {
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 400,
-    maxWidth: 500
+    maxWidth: 500,
   },
   tableRow: {
     height: 10,
@@ -52,6 +52,16 @@ function SWRExample() {
     <li key={item.name.toString()}>{item.name}</li>
   ));
 
+  const deleteItem = async (id) => {
+    mutate(
+      "/api/products/",
+      data.filter((c) => c.id !== id),
+      false
+    );
+    const res = await Api.product.delete({ id });
+    trigger("/api/products");
+  };
+
   return (
     <div>
       <div>SWRExample123</div>
@@ -61,7 +71,6 @@ function SWRExample() {
       <div>
         {JSON.stringify(data)}
         <hr />
-
       </div>
       <div>
         <TableContainer>
@@ -76,15 +85,17 @@ function SWRExample() {
                 <TableCell className={classes.tableCell} align="left">
                   id
                 </TableCell>
-                <TableCell
-                  className={classes.tableCell}
-                  align="right"
-                >active</TableCell>
+                <TableCell className={classes.tableCell} align="right">
+                  active
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data?.map((row) => (
-                <TableRow key={row.name.toString()} className={classes.tableRow}>
+                <TableRow
+                  key={row.name.toString()}
+                  className={classes.tableRow}
+                >
                   <TableCell
                     className={classes.tableCell}
                     component="th"
@@ -96,7 +107,10 @@ function SWRExample() {
                     {row.id}
                   </TableCell>
                   <TableCell className={classes.tableCell} align="left">
-                    {row.active ? "Active" : "Loading..."}
+                    {row.active ? "Active" : "No"}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} align="left">
+                    <button onClick={() => deleteItem(row.id)}> delete</button>
                   </TableCell>
                 </TableRow>
               ))}
