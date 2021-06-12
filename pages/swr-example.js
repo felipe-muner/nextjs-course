@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SWRExample() {
-  const { data } = useSWR("/api/products");
+function SWRExample({ productsBackEnd }) {
+  const { data } = useSWR("/api/products", {initialData: productsBackEnd});
   const classes = useStyles();
 
   const getProduct = async () => {
@@ -124,5 +124,10 @@ function SWRExample() {
     </div>
   );
 }
+
+SWRExample.getInitialProps = async (ctx) => {
+  const res = await Api.product.getAll();
+  return { productsBackEnd: res };
+};
 
 export default SWRExample;

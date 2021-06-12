@@ -9,7 +9,7 @@ class Product {
   // }
   async getAll(){
     const res = await fetcher.get({
-      url: "/api/products",
+      url: this.server + "/api/products",
       data: {},
     })
     const data = await res.json()
@@ -17,7 +17,7 @@ class Product {
   }
   async add(payload) {
     const res = await fetcher.post({
-      url: "/api/products",
+      url: this.server + "/api/products",
       data: payload,
     })
     const data = await res.json()
@@ -26,7 +26,7 @@ class Product {
 
   async update(payload) {
     const res = await fetcher.put({
-      url: "/api/products",
+      url: this.server + "/api/products",
       data: payload,
     });
     const data = await res.json()
@@ -35,7 +35,7 @@ class Product {
   async delete(payload){
     console.log(payload,'felipeee')
     const res = await fetcher.delete({
-      url: "/api/products",
+      url: this.server + "/api/products",
       data: payload,
     });
     const data = await res.json()
