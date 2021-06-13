@@ -69,17 +69,21 @@ export default function GqlServerSide({ countries }) {
               </div>
             </div>
             <hr />
-
-            <hr />
-            <Grid
-              container
-              direction="row"
-              alignItems="center"
-              style={{
-                background: "red",
-              }}
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              bgcolor="background.paper"
             >
-              <PhoneIcon /> FELIPE
+              <Box p={2} bgcolor="grey.300">
+                <Grid container direction="row" alignItems="center" m={3}>
+                <PhoneIcon /> <p style={{ fontSize: "20px", marginLeft: '10px' }}>{country.phone}</p>
+                </Grid>
+              </Box>
+            </Box>
+            <hr />
+            <Box></Box>
+            <Grid container direction="row" alignItems="center">
+              <PhoneIcon /> <span>FELIPE</span>
             </Grid>
           </div>
         ))}
