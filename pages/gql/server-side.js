@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import styles from "../../styles/graphql.module.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,6 +12,10 @@ import client from "../../constants/apollo-client";
 const useStyles = makeStyles((theme) => ({
   felipe: {
     marginTop: 5,
+  },
+  wrapIcon: {
+    verticalAlign: "middle",
+    display: "inline-flex",
   },
 }));
 
@@ -26,7 +32,7 @@ export default function GqlServerSide({ countries }) {
       <h3 className={styles.title}>Getting GraphQL</h3>
       <div className={styles.grid}>
         {countries.map((country) => (
-          <div key={country?.code?.toString()} className={styles.card}>
+          <div key={country.code.toString()} className={styles.card}>
             <Box>
               <p>
                 {country.emoji} - {country.code}
@@ -35,10 +41,46 @@ export default function GqlServerSide({ countries }) {
             <Box>
               <h3 className={classes.felipe}>{country.name}</h3>
             </Box>
-            <Box>
+            <Box
+              display="flex"
+              flexWrap="nowrap"
+              flexDirection="row-reverse"
+              p={1}
+            >
+              <p>{country.phone}</p>
               <PhoneIcon />
-              <span>{country.phone}</span>
             </Box>
+            <hr />
+            <div
+              style={{
+                display: "flex",
+                background: "red",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <PhoneIcon />
+                <span>FELIPE</span>
+              </div>
+            </div>
+            <hr />
+
+            <hr />
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              style={{
+                background: "red",
+              }}
+            >
+              <PhoneIcon /> FELIPE
+            </Grid>
           </div>
         ))}
       </div>
@@ -76,7 +118,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      countries: countries,
+      countries: countries.slice(0, 4),
     },
   };
 }
