@@ -7,7 +7,7 @@ import theme from "../src/theme";
 import Layout from "../components/layout/Layout";
 
 import { ApolloProvider } from "@apollo/client";
-import client from "../apollo-client";
+import client from "../constants/apollo-client"
 
 import AuthenticationLayer from "../components/AuthenticationLayer";
 
