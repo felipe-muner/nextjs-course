@@ -5,12 +5,16 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import Layout from "../components/layout/Layout";
+
+import { ApolloProvider } from "@apollo/client";
+import client from "../apollo-client";
+
 import AuthenticationLayer from "../components/AuthenticationLayer";
 
 import { UserProvider } from "../store/users";
 import { RootProvider } from "../store/rootProvider";
 
-import { SWRConfig } from 'swr';
+import { SWRConfig } from "swr";
 
 // import { StateProvider } from "../store/store";
 export default function MyApp(props) {
@@ -46,7 +50,9 @@ export default function MyApp(props) {
                 }}
               >
                 <Layout>
-                  <Component {...pageProps} />
+                  <ApolloProvider client={client}>
+                    <Component {...pageProps} />
+                  </ApolloProvider>
                 </Layout>
               </SWRConfig>
             </RootProvider>
