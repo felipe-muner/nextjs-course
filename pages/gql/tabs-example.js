@@ -8,6 +8,11 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
+import CLeague from "../../components/graphql/CLeague";
+import Countries from "../../components/graphql/Countries";
+import Spacex from "../../components/graphql/Spacex";
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -86,13 +91,13 @@ export default function SimpleTabs() {
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
-            Item One
+            <CLeague />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item Two
+          <Countries />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item Three
+            <Spacex />
           </TabPanel>
         </div>
       </Grid>
