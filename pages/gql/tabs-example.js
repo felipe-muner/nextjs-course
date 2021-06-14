@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 import CLeague from "../../components/graphql/CLeague";
@@ -65,9 +64,8 @@ export default function SimpleTabs() {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs></Grid>
-      <Grid item xs={6}>
+    <Grid container spacing={3} style={{ marginLeft: "10px" }}>
+      <Grid item xs={9}>
         <Box className={classes.root} style={{ marginTop: "20px" }}>
           <AppBar
             className={classes.appbar}
@@ -85,18 +83,50 @@ export default function SimpleTabs() {
               <Tab label="Space X" {...a11yProps(2)} />
             </Tabs>
           </AppBar>
-          <TabPanel value={value} index={0}>
+          <TabPanel
+            value={value}
+            index={0}
+            style={{
+              padding: "0px",
+              borderLeft: "10px solid #DDD",
+              borderBottom: "10px solid #DDD",
+              borderRight: "10px solid #DDD",
+              borderBottomRightRadius: "10px",
+              borderBottomLeftRadius: "10px",
+            }}
+          >
             <Countries />
           </TabPanel>
-          <TabPanel value={value} index={1}>
+          <TabPanel
+            value={value}
+            index={1}
+            style={{
+              padding: "0px",
+              borderLeft: "10px solid #DDD",
+              borderBottom: "10px solid #DDD",
+              borderRight: "10px solid #DDD",
+              borderBottomRightRadius: "10px",
+              borderBottomLeftRadius: "10px",
+            }}
+          >
             <CLeague />
           </TabPanel>
-          <TabPanel value={value} index={2}>
+          <TabPanel
+            value={value}
+            index={2}
+            style={{
+              padding: "0px",
+              borderLeft: "10px solid #DDD",
+              borderBottom: "10px solid #DDD",
+              borderRight: "10px solid #DDD",
+              borderBottomRightRadius: "10px",
+              borderBottomLeftRadius: "10px",
+            }}
+          >
             <Spacex />
           </TabPanel>
         </Box>
       </Grid>
-      <Grid item xs></Grid>
     </Grid>
   );
 }
