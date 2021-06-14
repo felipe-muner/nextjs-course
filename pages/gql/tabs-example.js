@@ -12,7 +12,6 @@ import CLeague from "../../components/graphql/CLeague";
 import Countries from "../../components/graphql/Countries";
 import Spacex from "../../components/graphql/Spacex";
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -24,11 +23,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -73,7 +68,7 @@ export default function SimpleTabs() {
     <Grid container spacing={3}>
       <Grid item xs></Grid>
       <Grid item xs={6}>
-        <div className={classes.root} style={{ marginTop: "20px" }}>
+        <Box className={classes.root} style={{ marginTop: "20px" }}>
           <AppBar
             className={classes.appbar}
             position="static"
@@ -85,21 +80,21 @@ export default function SimpleTabs() {
               aria-label="simple tabs example"
               centered
             >
-              <Tab label="Item One" {...a11yProps(0)} />
-              <Tab label="Item Two" {...a11yProps(1)} />
-              <Tab label="Item Three" {...a11yProps(2)} />
+              <Tab label="Countries" {...a11yProps(0)} />
+              <Tab label="Champions League" {...a11yProps(1)} />
+              <Tab label="Space X" {...a11yProps(2)} />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
-            <CLeague />
+            <Countries />
           </TabPanel>
           <TabPanel value={value} index={1}>
-          <Countries />
+            <CLeague />
           </TabPanel>
           <TabPanel value={value} index={2}>
             <Spacex />
           </TabPanel>
-        </div>
+        </Box>
       </Grid>
       <Grid item xs></Grid>
     </Grid>
