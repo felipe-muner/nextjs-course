@@ -87,7 +87,6 @@ export default function SimpleTabs() {
             value={value}
             index={0}
             style={{
-              padding: "0px",
               borderLeft: "10px solid #DDD",
               borderBottom: "10px solid #DDD",
               borderRight: "10px solid #DDD",
@@ -101,7 +100,6 @@ export default function SimpleTabs() {
             value={value}
             index={1}
             style={{
-              padding: "0px",
               borderLeft: "10px solid #DDD",
               borderBottom: "10px solid #DDD",
               borderRight: "10px solid #DDD",
@@ -115,7 +113,6 @@ export default function SimpleTabs() {
             value={value}
             index={2}
             style={{
-              padding: "0px",
               borderLeft: "10px solid #DDD",
               borderBottom: "10px solid #DDD",
               borderRight: "10px solid #DDD",
