@@ -16,6 +16,7 @@ function a11yProps(index) {
   };
 } */}
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -36,6 +37,17 @@ export default function SimpleTabs() {
   };
 
   return (
-    <div>felipe</div>
+    <div>
+      <Github />
+    </div>
   );
+}
+
+export async function getStaticProps() {
+  console.log(process.env.TOKEN_GITHUB)
+  return{
+    props:{
+      felipe: 10
+    }
+  }
 }
