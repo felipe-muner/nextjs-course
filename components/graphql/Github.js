@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-export default function Github({felipe}) {
-  console.log(felipe)
+export default function Github() {
+  
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
