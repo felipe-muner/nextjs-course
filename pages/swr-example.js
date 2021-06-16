@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SWRExample({ productsBackEnd }) {
-  const { data } = useSWR("/api/products", {initialData: productsBackEnd});
+  const { data } = useSWR("/api/products", { initialData: productsBackEnd });
   const classes = useStyles();
 
   const getProduct = async () => {
