@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { ApolloClient, createHttpLink, InMemoryCache, gql } from "@apollo/client";
-import { setContext } from '@apollo/client/link/context';
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  gql,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -30,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs({ user }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -40,7 +45,7 @@ export default function SimpleTabs() {
 
   return (
     <div>
-      <Github />
+      <Github user={user} />
     </div>
   );
 }
@@ -55,23 +60,22 @@ export default function SimpleTabs() {
 
 export async function getStaticProps() {
   const httpLink = createHttpLink({
-    uri: 'https://api.github.com/graphql',
+    uri: "https://api.github.com/graphql",
   });
 
   const authLink = setContext((_, { headers }) => {
-    // get the authentication token from local storage if it exists
-    const token = process.env.TOKEN_GITHUB
-    // return the headers to the context so httpLink can read them
+    const token = process.env.TOKEN_GITHUB;
+
     return {
       headers: {
         ...headers,
         authorization: token ? `Bearer ${token}` : "",
-      }
-    }
+      },
+    };
   });
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   });
 
   const { data } = await client.query({

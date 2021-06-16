@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-export default function Github() {
-  
+export default function Github({user}) {
+  console.log(user)
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
@@ -15,16 +15,10 @@ export default function Github() {
     <div>
       <h1>G HUB I'm</h1>
       <div>
-        {/* {JSON.stringify(data)}
-        <br></br>
-        {JSON.stringify(process.env)} */}
+        {JSON.stringify(user)}
       </div>
     </div>
   );
-}
-
-export async function getStaticProps() {
-    console.log(process);
 }
 // export async function getStaticProps() {
 //   const res = await fetch(`https://api.github.com/users/felipe-muner`, {
