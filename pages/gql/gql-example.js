@@ -34,24 +34,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleTabs() {
+export default function GQLExample({ user }) {
+  console.log('dentro', user)
   const classes = useStyles();
   const [value, setValue] = useState(0);
-  const [user, setUser] = useState(0);
-
-  useEffect(() => {
-    switch (value) {
-      case "github":
-        return getUserData(setUser);
-      // case "champions":
-      //   return ''
-      // case "spacex":
-      //   return ''
-      // case "countries":
-      //   return ''
-    }
-    // setUser(userdata.data);
-  }, [value]);
 
   const handleChange = (val) => {
     setValue(val);
@@ -105,64 +91,12 @@ export default function SimpleTabs() {
   );
 }
 
-// export async function getStaticProps() {
-//   return{
-//     props:{
-//       felipe: 10
-//     }
-//   }
-// }
-
-// export async function getStaticProps() {
-// const httpLink = createHttpLink({
-//   uri: "https://api.github.com/graphql",
-// });
-// const authLink = setContext((_, { headers }) => {
-//   console.log(headers);
-//   const token = process.env.TOKEN_GITHUB;
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : "",
-//     },
-//   };
-// });
-// const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache(),
-// });
-// const { data } = await client.query({
-//   query: gql`
-//     {
-//       user(login: "felipe-muner") {
-//         id
-//         name
-//         avatarUrl
-//         createdAt
-//         contributionsCollection {
-//           totalCommitContributions
-//           totalIssueContributions
-//           totalPullRequestContributions
-//           totalPullRequestReviewContributions
-//           contributionCalendar {
-//             totalContributions
-//             weeks {
-//               contributionDays {
-//                 contributionCount
-//                 weekday
-//                 date
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `,
-// });
-// console.log(data);
-// return {
-//   props: {
-//     user: data.user,
-//   },
-// };
-// }
+export async function getStaticProps() {
+  const data = await getUserData();
+  console.log(data);
+  return {
+    props: {
+      user: data.user,
+    },
+  };
+}

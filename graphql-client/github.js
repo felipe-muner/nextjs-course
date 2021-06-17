@@ -11,7 +11,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = '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';
+  const token = process.env.TOKEN_GITHUB;
 
   return {
     headers: {
@@ -25,7 +25,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export async function getUserData(setData) {
+export async function getUserData() {
   const { data } = await client.query({
     query: gql`
       {
@@ -54,5 +54,6 @@ export async function getUserData(setData) {
       }
     `,
   });
-  setData(data)
+
+  return data;
 }
