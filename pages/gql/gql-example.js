@@ -1,11 +1,4 @@
-import { useState } from "react";
-import {
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache,
-  gql,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { useState, useEffect } from "react";
 
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -13,10 +6,12 @@ import Button from "@material-ui/core/Button";
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import ClientOnly from "../../components/ClientOnly";
 import Github from "../../components/graphql/Github";
 import CLeague from "../../components/graphql/CLeague";
 import Countries from "../../components/graphql/Countries";
 import Spacex from "../../components/graphql/Spacex";
+import { getUserData } from "../../graphql-client/github";
 
 {
   /* <Tab label="Countries" {...a11yProps(0)} />
@@ -39,9 +34,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleTabs({ user }) {
+export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const [user, setUser] = useState(0);
+
+  useEffect(() => {
+    switch (value) {
+      case "github":
+        return getUserData(setUser);
+      // case "champions":
+      //   return ''
+      // case "spacex":
+      //   return ''
+      // case "countries":
+      //   return ''
+    }
+    // setUser(userdata.data);
+  }, [value]);
 
   const handleChange = (val) => {
     setValue(val);
@@ -58,8 +68,6 @@ export default function SimpleTabs({ user }) {
       case "countries":
         return <Countries />;
     }
-    console.log(value, "felipe");
-    return <Github user={user} />;
   };
 
   return (
@@ -89,7 +97,9 @@ export default function SimpleTabs({ user }) {
         </Grid>
       </Box>
       <Box>
-        <Grid>{setView()}</Grid>
+        <Grid>
+          <ClientOnly>{setView()}</ClientOnly>
+        </Grid>
       </Box>
     </div>
   );
@@ -103,61 +113,56 @@ export default function SimpleTabs({ user }) {
 //   }
 // }
 
-export async function getStaticProps() {
-  const httpLink = createHttpLink({
-    uri: "https://api.github.com/graphql",
-  });
-
-  const authLink = setContext((_, { headers }) => {
-    console.log(headers);
-    const token = process.env.TOKEN_GITHUB;
-
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    };
-  });
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-  });
-
-  const { data } = await client.query({
-    query: gql`
-      {
-        user(login: "felipe-muner") {
-          id
-          name
-          avatarUrl
-          createdAt
-          contributionsCollection {
-            totalCommitContributions
-            totalIssueContributions
-            totalPullRequestContributions
-            totalPullRequestReviewContributions
-            contributionCalendar {
-              totalContributions
-              weeks {
-                contributionDays {
-                  contributionCount
-                  weekday
-                  date
-                }
-              }
-            }
-          }
-        }
-      }
-    `,
-  });
-
-  console.log(data);
-
-  return {
-    props: {
-      user: data.user,
-    },
-  };
-}
+// export async function getStaticProps() {
+// const httpLink = createHttpLink({
+//   uri: "https://api.github.com/graphql",
+// });
+// const authLink = setContext((_, { headers }) => {
+//   console.log(headers);
+//   const token = process.env.TOKEN_GITHUB;
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : "",
+//     },
+//   };
+// });
+// const client = new ApolloClient({
+//   link: authLink.concat(httpLink),
+//   cache: new InMemoryCache(),
+// });
+// const { data } = await client.query({
+//   query: gql`
+//     {
+//       user(login: "felipe-muner") {
+//         id
+//         name
+//         avatarUrl
+//         createdAt
+//         contributionsCollection {
+//           totalCommitContributions
+//           totalIssueContributions
+//           totalPullRequestContributions
+//           totalPullRequestReviewContributions
+//           contributionCalendar {
+//             totalContributions
+//             weeks {
+//               contributionDays {
+//                 contributionCount
+//                 weekday
+//                 date
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   `,
+// });
+// console.log(data);
+// return {
+//   props: {
+//     user: data.user,
+//   },
+// };
+// }

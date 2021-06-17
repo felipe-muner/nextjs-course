@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-export default function Github({user}) {
-  console.log(user)
+export default function Github({ user }) {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
@@ -13,10 +12,8 @@ export default function Github({user}) {
 
   return (
     <div>
-      <h1>G HUB I'm</h1>
-      <div>
-        {JSON.stringify(user)}
-      </div>
+      <h1>Git Hub my profile</h1>
+      <div>{JSON.stringify(user)}</div>
     </div>
   );
 }
