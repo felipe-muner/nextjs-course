@@ -1,10 +1,10 @@
 import Box from "@material-ui/core/Box";
 
-export default function Countries() {
+export default function Countries({ countries }) {
   return (
-    <Box p={0} >
-
+    <Box>
       <h1>Countries</h1>
+      <div>{JSON.stringify(countries)}</div>
     </Box>
   );
 }

@@ -12,6 +12,7 @@ import CLeague from "../../components/graphql/CLeague";
 import Countries from "../../components/graphql/Countries";
 import Spacex from "../../components/graphql/Spacex";
 import { getUserData } from "../../graphql-client/github";
+import { getCountries } from "../../graphql-client/spacex";
 
 {
   /* <Tab label="Countries" {...a11yProps(0)} />
@@ -34,8 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GQLExample({ user }) {
-  console.log('dentro', user)
+export default function GQLExample({ user, countries }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -52,7 +52,7 @@ export default function GQLExample({ user }) {
       case "spacex":
         return <Spacex />;
       case "countries":
-        return <Countries />;
+        return <Countries countries={countries} />;
     }
   };
 
@@ -92,11 +92,13 @@ export default function GQLExample({ user }) {
 }
 
 export async function getStaticProps() {
-  const data = await getUserData();
-  console.log(data);
+  const github = await getUserData();
+  const countries = await getCountries();
+
   return {
     props: {
-      user: data.user,
+      user: github.user,
+      countries,
     },
   };
 }
