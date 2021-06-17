@@ -6,7 +6,11 @@ import {
   gql,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import Github from "../../components/graphql/Github";
@@ -39,13 +43,54 @@ export default function SimpleTabs({ user }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = (val) => {
+    setValue(val);
+  };
+
+  const setView = () => {
+    switch (value) {
+      case "github":
+        return <Github user={user} />;
+      case "champions":
+        return <CLeague />;
+      case "spacex":
+        return <Spacex />;
+      case "countries":
+        return <Countries />;
+    }
+    console.log(value, "felipe");
+    return <Github user={user} />;
   };
 
   return (
     <div>
-      <Github user={user} />
+      <Box>
+        <Grid container>
+          <Button variant="contained" onClick={() => handleChange("github")}>
+            Github
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleChange("champions")}
+            color="primary"
+          >
+            Champions League
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleChange("spacex")}
+            color="secondary"
+          >
+            SpaceX
+          </Button>
+          <Button variant="contained" onClick={() => handleChange("countries")}>
+            countries
+          </Button>
+        </Grid>
+      </Box>
+      <Box>
+        <Grid>{setView()}</Grid>
+      </Box>
     </div>
   );
 }
@@ -64,7 +109,7 @@ export async function getStaticProps() {
   });
 
   const authLink = setContext((_, { headers }) => {
-    console.log(headers)
+    console.log(headers);
     const token = process.env.TOKEN_GITHUB;
 
     return {
