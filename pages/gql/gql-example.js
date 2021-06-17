@@ -12,7 +12,8 @@ import CLeague from "../../components/graphql/CLeague";
 import Countries from "../../components/graphql/Countries";
 import Spacex from "../../components/graphql/Spacex";
 import { getUserData } from "../../graphql-client/github";
-import { getCountries } from "../../graphql-client/spacex";
+import { getCountries } from "../../graphql-client/countries";
+import { getSpacex } from "../../graphql-client/spacex";
 
 {
   /* <Tab label="Countries" {...a11yProps(0)} />
@@ -28,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     paper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(4),
       textAlign: "center",
       color: theme.palette.text.secondary,
     },
   },
 }));
 
-export default function GQLExample({ user, countries }) {
+export default function GQLExample({ user, countries, spacex }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -50,14 +51,14 @@ export default function GQLExample({ user, countries }) {
       case "champions":
         return <CLeague />;
       case "spacex":
-        return <Spacex />;
+        return <Spacex spacex={spacex} />;
       case "countries":
         return <Countries countries={countries} />;
     }
   };
 
   return (
-    <div>
+    <Grid item container xs={12} md={12} lg={6}>
       <Box>
         <Grid container>
           <Button variant="contained" onClick={() => handleChange("github")}>
@@ -87,18 +88,20 @@ export default function GQLExample({ user, countries }) {
           <ClientOnly>{setView()}</ClientOnly>
         </Grid>
       </Box>
-    </div>
+    </Grid>
   );
 }
 
 export async function getStaticProps() {
   const github = await getUserData();
   const countries = await getCountries();
+  const spacex = await getSpacex();
 
   return {
     props: {
       user: github.user,
       countries,
+      spacex,
     },
   };
 }
