@@ -64,6 +64,7 @@ export async function getStaticProps() {
   });
 
   const authLink = setContext((_, { headers }) => {
+    console.log(headers)
     const token = process.env.TOKEN_GITHUB;
 
     return {
